@@ -1,0 +1,50 @@
+.banner-container, .sample-products {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.banner-container img {
+    width: 100%;
+}
+
+.banner-container .p {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    bottom: 180px;
+    left: 33%;
+    width: auto;
+}
+
+.btn-shop {
+    position: relative;
+    bottom: 130px;
+    left: 45%;
+    background-color: white;
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-shop:hover {
+    background-color: #343a40;
+    border-color: white;
+    border: 1px solid white;
+    width: 150px;
+}
+
+.col-md-3 img {
+    width: 100%;
+}
+
+.col-md-3:hover {
+    cursor: pointer;
+}
+
+.col-md-3  h2 {
+    margin: 20px 0;
+    font-weight: bolder;
+    text-align: center;
+}
