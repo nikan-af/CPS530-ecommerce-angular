@@ -60,7 +60,7 @@ export class LoginComponent {
           this.userStatus.emit('loggedIn');
           this.userIsLoggedIn = true;
           this.modalService.close(this.content);
-          this.toastr.success("Hello " + response[0].username + ", you are logged in!");
+          this.toastr.success("Hello " + response[0].fullName + ", you are logged in!");
         },
         fail => {
           console.log(fail);
