@@ -7,12 +7,16 @@ import { User } from './models/user.model';
     providedIn: 'root'
 })
 export class DataService {
+    obj = {'title':'T-shirt by Jack & Jones','bullets':['Part of our responsible edit','Crew neck','Short sleeves','Logo chest embroidery','Relaxed fit','Slouchy cut']};
     tempUser: User = {
         id: 0,
         pwd: '',
         email: '',
         fullName: ''
     };
+
+    genderOfProducts = '';
+
     redirectUrl: string;
     baseUrl: string = "http://localhost:8080/api";
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
@@ -53,4 +57,19 @@ export class DataService {
         return false;
     }
 
+    getProducts(gender) {
+        return this.httpClient.post(this.baseUrl + '/products.php', {'gender': gender});
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+<div class="products">
+    <div *ngFor="let product of products; let i = index">
+        <div class="row" *ngIf="i % 3 === 0">
+            <div class="col-md-4" *ngIf="i < products.length">
+                <mat-card appMaterialElevation class="example-card">
+                    <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i].imageURL}}
+                            alt={{products[i].productName}}></div>
+                    <mat-card-content class="mat-content">
+                        <a (click)="favorite(products[i]); $event.stopPropagation()"><span class="material-icons delete-icon">favorite</span></a>
+                        <p>
+                            {{products[i].productName}}
+                        </p>
+                        <p class="price">
+                            CAD {{products[i].price}}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-4" *ngIf="i + 1 < products.length">
+                <mat-card appMaterialElevation class="example-card">
+                    <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+1].imageURL}}
+                            alt={{products[i+1].productName}}></div>
+                    <mat-card-content class="mat-content">
+                        <a (click)="favorite(products[i+1]); $event.stopPropagation()"><span class="material-icons delete-icon">favorite</span></a>
+                        <p>
+                            {{products[i+1].productName}}
+                        </p>
+                        <p class="price">
+                            CAD {{products[i+1].price}}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-4" *ngIf="i + 2 < products.length">
+                <mat-card appMaterialElevation class="example-card">
+                    <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+2].imageURL}}
+                            alt={{products[i+2].productName}}></div>
+                    <mat-card-content class="mat-content">
+                        <a (click)="favorite(products[i+2]); $event.stopPropagation()"><span class="material-icons delete-icon">favorite</span></a>
+                        <p>
+                            {{products[i+2].productName}}
+                        </p>
+                        <p class="price">
+                            CAD {{products[i+2].price}}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

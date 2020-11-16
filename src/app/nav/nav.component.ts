@@ -34,4 +34,8 @@ export class NavComponent {
             this.userIsLoggedIn = true;
         }
     }
+
+    setMenProducts() {
+        this.dataService.genderOfProducts = 'M';
+    }
 }
