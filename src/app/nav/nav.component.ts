@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from '../shared/modal.service';
 import { DataService } from '../shared/data.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'nav-component',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements AfterViewInit {
     closeResult = '';
     isMenuCollapsed: boolean;
     optionsBoxOpen = false;
     pageName = 'propertyListings';
     userIsLoggedIn = false;
+    cartItems = [];
 
-    constructor(public modalService: ModalService, private router: Router, private dataService: DataService) {
+    @ViewChild('content') content: ElementRef;
 
+    constructor(private modalService: ModalService, private router: Router, public dataService: DataService, private cookieService: CookieService) {
+        this.cartItems = JSON.parse(this.cookieService.get("cartItems"));
+    }
+
+    ngAfterViewInit() {
+        this.dataService.loginRef = this.content;
     }
 
     handleLogin(content) {
@@ -35,7 +43,7 @@ export class NavComponent {
         }
     }
 
-    setMenProducts() {
-        this.dataService.genderOfProducts = 'M';
+    setProductsGender(gender) {
+        this.dataService.genderOfProducts = gender;
     }
 }

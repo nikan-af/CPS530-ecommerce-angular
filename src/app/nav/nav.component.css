@@ -2,6 +2,10 @@ li {
   white-space: nowrap;
 }
 
+a {
+  cursor: pointer;
+}
+
 #logo {
   width: 60px;
   height: 60px;

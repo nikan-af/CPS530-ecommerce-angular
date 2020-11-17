@@ -1,39 +1,57 @@
-.products {
-  padding: 50px;
+img {
+  height: 60vh;
+  width: 100%;
 }
 
-.products .row {
-  margin: 30px 0;
+.product-container {
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.products .mat-card {
-  cursor: pointer;
+.details-container {
+  padding: 20px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.2rem;
+  overflow-y: visible;
 }
 
-p {
-  font-size: 1.1rem;
-  font-family: "Open Sans Condensed", sans-serif;
+.carousel-item.active {
+  height: 100% !important;
 }
 
-.delete-icon {
-  position: absolute;
-  color: #212529;
-  right: 10px;
-  top: 10px;
-  font-family: "Material Icons";
-  font-size: 2rem;
+.h4 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin-top: 30px;
+  font-size: 1.2rem;
 }
 
-.delete-icon:hover {
-  color: #f05454;
+.h5 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.actionButtons {
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.actionButtons button {
+  margin: 0 10px;
+}
+
+li {
+  margin: 10px 0;
 }
 
 /* Loading sign */
 
 .backdrop {
   margin: 0 auto;
+  margin-top: 25vh;
   text-align: center;
-  margin-bottom: 70vh;
 }
 
 .spinner {
@@ -84,3 +102,23 @@ p {
   letter-spacing:0.06em;
   font-size: 0.8rem;
 }
+
+.field {
+  margin: 1.5vh 2.5%;
+  width: 33%;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .field-size {
+    float: left;
+    padding-left: 0px!important;
+  }
+
+  .field-qty {
+    float: right;
+    padding-left: 0px!important;
+    padding-right: 20px;
+  }
