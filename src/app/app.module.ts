@@ -27,6 +27,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
 
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { ModalService } from './shared/modal.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     ProductsComponent,
     MaterialElevationDirective,
     ContactComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
