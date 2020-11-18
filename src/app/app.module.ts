@@ -29,6 +29,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { ModalService } from './shared/modal.service';
 import { AboutComponent } from './about/about.component';
+import { MissionComponent } from './mission/mission.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AboutComponent } from './about/about.component';
     MaterialElevationDirective,
     ContactComponent,
     ProductDialogComponent,
-    AboutComponent
+    AboutComponent,
+    MissionComponent
   ],
   imports: [
     BrowserModule,

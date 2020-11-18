@@ -1,0 +1,41 @@
+#mainTitle{
+
+    text-align: center;
+    font-size: 38px;
+    padding-top: 40%;
+    
+}
+.content{
+    text-align: left;
+    padding: 2% 2% 2%;
+    font-family: 'Asap Condensed', sans-serif;
+
+}
+.info{
+    padding-bottom: 2%;
+    padding-top: 1%;
+    font-size: large;
+}
+
+hr{
+    float: left;
+    width: 25%;
+
+}
+.header{
+    display: none;
+    height: 90vh;
+    width: 100%;
+    background-size: cover;
+    background-image: url("../../assets/images/missionvaluesbanner.jpg");
+}
+@media screen and (min-width:800px){
+    #mainTitle{
+        color:white;
+    }
+    .header{
+        display: block;
+    }
+    
+}
+
