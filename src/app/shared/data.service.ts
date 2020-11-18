@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User } from './models/user.model';
 import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,7 @@ export class DataService {
         fullName: ''
     };
     cartItems = [];
+    cartItemsBehaviourSubject: BehaviorSubject<any>;
     loginRef: ElementRef;
     favoriteItems = [];
 
@@ -31,6 +33,7 @@ export class DataService {
         } else {
             this.cartItems = JSON.parse(tempCookie);
         }
+        this.cartItemsBehaviourSubject = new BehaviorSubject<any>(this.cartItems);
     }
 
     public userlogin(email, password) {
@@ -89,10 +92,13 @@ export class DataService {
 
             return false;
         })
+
+        console.log(productExists);
         
         var cartItems = this.getCartItems();
         if (!productExists.includes(true)) {
             cartItems.push(product);
+            this.cartItemsBehaviourSubject.next(cartItems);
             this.cartItems = cartItems;
             this.cookieService.set("cartItems", JSON.stringify(cartItems));
             return true;
@@ -101,6 +107,21 @@ export class DataService {
         return false;
     }
 
+    updateCartItems() {
+        return new BehaviorSubject<any>(this.cartItems);
+    }
+
+    removeItem(product) {
+        var tmpCartItems = this.getCartItems();
+        for (var i = 0; i < tmpCartItems.length; i++) {
+            if (tmpCartItems[i].productId == product.productId) {
+                tmpCartItems.splice(i, 1);
+            }
+        }
+        this.cartItems = tmpCartItems;
+        this.cartItemsBehaviourSubject.next(tmpCartItems);
+        this.cookieService.set("cartItems", JSON.stringify(tmpCartItems));
+    }
 }
 
 

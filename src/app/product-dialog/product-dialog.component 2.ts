@@ -18,7 +18,6 @@ export class ProductDialogComponent implements OnInit {
     loading = true;
     itemAlreadyAdded = false;
     size = 'xs';
-    qty = 1;
     cartItems = [];
 
     constructor(private dataService: DataService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ProductDialogData, private modalSerivce: ModalService) {
@@ -40,7 +39,7 @@ export class ProductDialogComponent implements OnInit {
     }
 
     addToCart() {
-        const result = this.dataService.addProductToCart({...this.product, 'qty': this.qty, 'size': this.size});
+        const result = this.dataService.addProductToCart(this.product);
         
         if (result) {
             this.cartItems.push(this.product);

@@ -47,4 +47,9 @@ export class NavComponent implements AfterViewInit {
     setProductsGender(gender) {
         this.dataService.genderOfProducts = gender;
     }
+
+    openCartHandler() {
+        // this.dataService.updateShoppingCart
+        this.openCart.emit()
+    }
 }
