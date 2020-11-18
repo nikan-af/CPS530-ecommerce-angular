@@ -1,7 +1,20 @@
-<nav-component></nav-component>
+<nav-component (openCart)="handleOpenCart()"></nav-component>
+<div class="main">
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav #sidenav mode="over" position="end">
+            <app-shopping-cart></app-shopping-cart>
+        </mat-sidenav>
 
+<<<<<<< HEAD
 <div class="main">
     <router-outlet></router-outlet>
 </div>
-
+=======
+        <mat-sidenav-content>     
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
 <footer-component></footer-component>
+>>>>>>> 15bcb6d... Added the shopping cart sidenav.
+
