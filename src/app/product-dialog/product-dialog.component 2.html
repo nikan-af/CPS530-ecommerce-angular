@@ -25,7 +25,7 @@
         <div class="col-md-6">
           <div class="form-group field-size">
             <label for="size">Size:</label>
-            <select class="form-control" id="size" name="size" [(ngModel)]="this.size">
+            <select class="form-control" id="size">
               <option value="xs">XS</option>
               <option value="s">S</option>
               <option value="m">M</option>
@@ -37,7 +37,7 @@
         <div class="col-md-6">
           <div class="form-group field-qty">
             <label for="qty">Qty:</label>
-            <select class="form-control" id="qty" name="qty" [(ngModel)]="this.qty">
+            <select class="form-control" id="qty">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -58,7 +58,8 @@
         <div class="col-md-12">
           <button mat-raised-button class="resetButton" mat-dialog-close type="submit"><span
               class="material-icons delete-icon">favorite</span></button>
-          <button mat-raised-button class="saveButton" type="submit" (click)="addToCart()">Add TO CART</button>
+          <button mat-raised-button class="saveButton" type="submit" (click)="addToCart()">Add to my
+            cart</button>
           <p class="error" *ngIf="itemAlreadyAdded">Item is already added to your cart.</p>
         </div>
       </div>

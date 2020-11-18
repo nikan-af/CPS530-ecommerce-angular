@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
         this.dialog.open(ProductDialogComponent, {
             panelClass: 'custom-dialog-container',
             width: '60vw',
-            height: '60vh',
+            height: '67vh',
             data: product
           });
     }

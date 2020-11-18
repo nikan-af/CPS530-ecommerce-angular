@@ -1,0 +1,73 @@
+.container-fluid {
+  width: 400px;
+  padding: 30px;
+}
+
+.shopping-cart-item {
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.mat-card {
+  padding: 0px !important;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 1.2rem;
+}
+
+.mat-card-image:first-child {
+  margin-top: 0px !important;
+}
+
+.mat-card-image {
+  margin: 0px !important;
+}
+
+.shopping-cart-item img {
+  width: 120px;
+  height: 150px;
+}
+
+.card-image {
+  height: 100%;
+}
+
+.card-image img {
+  height: 100%;
+}
+
+.size-and-quantity {
+  width: 100%;
+  margin-left: 2px;
+}
+
+.size-and-quantity .col-md-6 {
+  padding: 0px !important;
+}
+
+.size-and-quantity .col-md-6 select {
+  width: 67%;
+  padding: 0;
+  height: auto;
+}
+
+.action-buttons {
+  text-align: center;
+}
+
+.action-buttons button {
+  margin: 0 5px;
+}
+
+.delete-icon {
+  position: absolute;
+  z-index: 9;
+  color: #404041;
+  left: 1.5px;
+  top: 1.5px;
+  font-family: "Material Icons";
+  font-size: 1.3rem;
+}
+
+.delete-icon:hover {
+  color: #f05454;
+}

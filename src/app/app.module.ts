@@ -17,6 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { ContactComponent } from './contact/contact.component';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
 
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     ProductsComponent,
     MaterialElevationDirective,
     ContactComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +59,12 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     MatSelectModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
