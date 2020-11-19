@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="products">
+    <div *ngIf="cartItems.length > 0" class="products">
         <div *ngFor="let item of cartItems; let i = index">
             <div class="row">
                 <div class="col-md-12 shopping-cart-item" (click)="this.openProductDialog(item)">
@@ -60,5 +60,8 @@
             <button mat-raised-button class="cancel">CANCEL</button>
             <button mat-raised-button color="primary" class="checkout">CHECKOUT</button>
         </div>
+    </div>
+    <div class="no-items" *ngIf="cartItems.length === 0">
+        <h3>CART IS EMPTY</h3>
     </div>
 </div>
