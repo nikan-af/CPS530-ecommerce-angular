@@ -4,6 +4,7 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { ModalService } from '../shared/modal.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'products-component',
@@ -15,8 +16,9 @@ export class ProductsComponent implements OnInit {
     products: any;
     cartItems = [];
     loading = true;
+    gender = "";
 
-    constructor(private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService) {
+    constructor(private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService, private route: ActivatedRoute) {
         this.cartItems = JSON.parse(this.cookieService.get("cartItems"));
     }
 
@@ -25,8 +27,8 @@ export class ProductsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.dataService.genderOfProducts);
-        this.dataService.getProducts(this.dataService.genderOfProducts).subscribe(
+        this.gender = this.route.snapshot.url[0].path === 'products-men' ? 'M' : 'F';
+        this.dataService.getProducts(this.gender).subscribe(
             success => {
                 this.products = success;
                 console.log(success);

@@ -8,10 +8,10 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
-        $gender = mysqli_real_escape_string($mysqli, trim($request->gender));
+        $gender = mysqli_real_escape_string($con, trim($request->gender));
         $sql = '';
         $sql = "SELECT * FROM cps530.products where gender='$gender'";
-        if($result = mysqli_query($mysqli,$sql)) {
+        if($result = mysqli_query($con,$sql)) {
             $rows = array();
             while($row = mysqli_fetch_assoc($result)) {
                 $rows[] = $row;

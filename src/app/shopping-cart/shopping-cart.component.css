@@ -71,3 +71,14 @@
 .delete-icon:hover {
   color: #f05454;
 }
+
+.no-items {
+  text-align: center;
+}
+
+.no-items h3 {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 2.5rem;
+  padding-top: 40vh;
+  color: #686870d0;
+}
