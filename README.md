@@ -18,10 +18,10 @@ Then place the api directory located in the project directory inside the htdocs 
 To get MYSQL working you need to download MySQL Workbench and then connect to the database instance I created.
 
 Credentials:
-Hostname: cps530.c6dypbfrueaa.us-east-2.rds.amazonaws.com
-username: root
+Hostname: cps530.mysql.database.azure.com
+username: cps530_admin@cps530
 port: 3306
-password: password
+password: Passwd@1
 
 ## Development server
 
