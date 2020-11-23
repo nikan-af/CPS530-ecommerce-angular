@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div *ngIf="cartItems.length > 0" class="products">
+    <div *ngIf="cartItems.length > 0 && !this.checkout" class="products">
         <div *ngFor="let item of cartItems; let i = index">
             <div class="row">
                 <div class="col-md-12 shopping-cart-item" (click)="this.openProductDialog(item)">
@@ -34,7 +34,7 @@
                                         <div class="col-md-6">
                                           <div class="form-group field-qty">
                                             <label for="qty">Qty:</label>
-                                            <select class="form-control" id="qty" name="qty" [(ngModel)]="item.qty" (click)="$event.stopPropagation()">
+                                            <select class="form-control" id="qty" name="qty" [(ngModel)]="item.qty" (change)="onChange($event)" (click)="$event.stopPropagation()">
                                               <option value="1">1</option>
                                               <option value="2">2</option>
                                               <option value="3">3</option>
@@ -56,12 +56,18 @@
                 </div>
             </div>
         </div>
+        <div class="row total-price">
+            <p><span class="title sub-title">SUB-TOTAL: </span><span class="price sub-title">CAD {{this.subTotal.toFixed(2)}}</span></p>
+            <p><span class="title sub-title">DELIVERY: </span><span class="price sub-title">FREE</span></p>
+            <p><span class="title">TOTAL TO PAY: </span><span class="price">CAD {{this.subTotal.toFixed(2)}}</span></p>
+        </div>
         <div class="action-buttons">
             <button mat-raised-button class="cancel">CANCEL</button>
-            <button mat-raised-button color="primary" class="checkout">CHECKOUT</button>
+            <button mat-raised-button color="primary" class="checkout" (click)="this.checkout = true;">CHECKOUT</button>
         </div>
     </div>
     <div class="no-items" *ngIf="cartItems.length === 0">
         <h3>CART IS EMPTY</h3>
     </div>
+    <app-checkout *ngIf="this.checkout" (goBack)="this.checkout = false;" [cartItems]="this.cartItems"></app-checkout>
 </div>

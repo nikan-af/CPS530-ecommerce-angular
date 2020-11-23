@@ -32,7 +32,6 @@ export class NavComponent implements AfterViewInit {
         if (this.userIsLoggedIn) {
           this.userIsLoggedIn = false;
           this.dataService.logout();
-          console.log(this.dataService.tempUser);
         } else {
           this.modalService.open(content);
         }

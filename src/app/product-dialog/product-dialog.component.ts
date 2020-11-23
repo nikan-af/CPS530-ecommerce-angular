@@ -20,9 +20,15 @@ export class ProductDialogComponent implements OnInit {
     size = 'xs';
     qty = 1;
     cartItems = [];
+    user;
 
     constructor(private dataService: DataService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ProductDialogData, private modalSerivce: ModalService) {
-        this.cartItems = this.dataService.getCartItems()
+        this.cartItems = this.dataService.getCartItems();
+        this.user = this.dataService.userBehaviorSubject.subscribe(
+            success => {
+                this.user = success;
+            }
+        )
     }
 
     ngOnInit() {
@@ -52,7 +58,7 @@ export class ProductDialogComponent implements OnInit {
     }
 
     addToFavorites(product) {
-        if (this.dataService.tempUser.email === '') {
+        if (this.user.email === '') {
             this.modalSerivce.open(this.modalSerivce.modalRef);
         }
     }

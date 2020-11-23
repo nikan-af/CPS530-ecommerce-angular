@@ -82,3 +82,22 @@
   padding-top: 40vh;
   color: #686870d0;
 }
+
+.total-price {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 1.2rem;
+  padding: 15px;
+}
+
+.total-price .price {
+  float: right;
+}
+
+.total-price .title {
+  width: 260px;
+  float: left;
+}
+
+.total-price .sub-title {
+  font-size: 1rem;
+}

@@ -10,16 +10,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
     obj = {'title':'T-shirt by Jack & Jones','bullets':['Part of our responsible edit','Crew neck','Short sleeves','Logo chest embroidery','Relaxed fit','Slouchy cut']};
-    tempUser: User = {
-        id: 0,
-        pwd: '',
-        email: '',
-        fullName: ''
-    };
+
     cartItems = [];
     cartItemsBehaviourSubject: BehaviorSubject<any>;
+    isLoggedInBehvaiourSubject: BehaviorSubject<any>;
+    userBehaviorSubject: BehaviorSubject<User>;
+
     loginRef: ElementRef;
     favoriteItems = [];
+    loggedIn = false;
+    tempUser: User = {
+        id: 0,
+        email: '',
+        pwd: '',
+        fullName: ''
+    };
 
     genderOfProducts = '';
  
@@ -34,6 +39,9 @@ export class DataService {
             this.cartItems = JSON.parse(tempCookie);
         }
         this.cartItemsBehaviourSubject = new BehaviorSubject<any>(this.cartItems);
+        this.isLoggedInBehvaiourSubject = new BehaviorSubject<any>(this.loggedIn);
+        this.userBehaviorSubject = new BehaviorSubject<any>(this.tempUser);
+        this.userBehaviorSubject.next(this.tempUser);
     }
 
     public userlogin(email, password) {
@@ -58,18 +66,14 @@ export class DataService {
     }
 
     logout() {
-        this.tempUser.id = 0;
-        this.tempUser.fullName = '';
-        this.tempUser.pwd = '';
-        this.tempUser.email = '';
-    }
-
-    isLoggedIn() {
-        const usertoken = this.getToken();
-        if (usertoken != null) {
-            return true
-        }
-        return false;
+        this.userBehaviorSubject.next(
+            {
+                id: 0,
+                fullName: '',
+                pwd: '',
+                email: ''
+            }
+        );
     }
 
     getProducts(gender) {
@@ -111,6 +115,12 @@ export class DataService {
         return new BehaviorSubject<any>(this.cartItems);
     }
 
+    resetCart() {
+        this.cartItems = [];
+        this.cartItemsBehaviourSubject.next([]);
+        this.cookieService.set("cartItems", JSON.stringify([]));
+    }
+
     removeItem(product) {
         var tmpCartItems = this.getCartItems();
         for (var i = 0; i < tmpCartItems.length; i++) {
@@ -121,6 +131,28 @@ export class DataService {
         this.cartItems = tmpCartItems;
         this.cartItemsBehaviourSubject.next(tmpCartItems);
         this.cookieService.set("cartItems", JSON.stringify(tmpCartItems));
+    }
+
+    recordPurchase(formData) {
+        return this.httpClient.post(this.baseUrl + '/recordPurchase.php', {...formData});
+    }
+
+    getOrders(userId) {
+        return this.httpClient.post(this.baseUrl + '/getOrders.php', {"userId":userId});
+    }
+
+    addFavorite(userId, productId) {
+        console.log(userId);
+        console.log(productId);
+        return this.httpClient.post(this.baseUrl + '/addFavorite.php', {"userId":userId,"productId":productId});
+    }
+
+    getFavorites(userId) {
+        return this.httpClient.post(this.baseUrl + '/getFavorites.php', {"userId":userId});
+    }
+
+    isLoggedIn() {
+        return new BehaviorSubject<any>(this.loggedIn);
     }
 }
 

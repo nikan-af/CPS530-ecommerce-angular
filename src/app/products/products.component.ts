@@ -5,6 +5,7 @@ import { ProductDialogComponent } from '../product-dialog/product-dialog.compone
 import { ModalService } from '../shared/modal.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'products-component',
@@ -17,9 +18,23 @@ export class ProductsComponent implements OnInit {
     cartItems = [];
     loading = true;
     gender = "";
+    user;
 
-    constructor(private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService, private route: ActivatedRoute) {
+    constructor(private toastr: ToastrService, private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService, private route: ActivatedRoute) {
         this.cartItems = JSON.parse(this.cookieService.get("cartItems"));
+        this.dataService.userBehaviorSubject.subscribe(
+            success => {
+                this.user = success;
+            }
+        );
+        // this.dataService.getFavorites(this.user.id).subscribe(
+        //     success => {
+        //         console.log(success);
+        //     },
+        //     fail => {
+        //         console.log(fail);
+        //     }
+        // )
     }
 
     onClick() {
@@ -41,10 +56,19 @@ export class ProductsComponent implements OnInit {
 
     addToFavorites(product) {
         console.log(product);
-        if (this.dataService.tempUser.email === '') {
+        console.log(this.user)
+        if (this.user.email === '') {
             this.modalService.open(this.dataService.loginRef);
         } else {
             this.dataService.favoriteItems.push(product);
+            this.dataService.addFavorite(this.user.id, product.productId).subscribe(
+                success => {
+                    console.log(success);
+                    this.toastr.success('Item added to your favorites.');
+                }, fail => {
+                    console.log(fail);
+                }
+            );
         }
     }
 

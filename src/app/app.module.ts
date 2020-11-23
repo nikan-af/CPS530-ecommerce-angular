@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ContactComponent } from './contact/contact.component';
 import { AppComponent } from './app.component';
@@ -29,6 +31,8 @@ import { ProductsComponent } from './products/products.component';
 
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MaterialElevationDirective,
     ContactComponent,
     ProductDialogComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CheckoutComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MatCheckboxModule,
     MatButtonModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ],
   providers: [
     CookieService
