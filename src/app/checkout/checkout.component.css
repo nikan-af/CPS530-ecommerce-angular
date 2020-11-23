@@ -1,0 +1,80 @@
+.go-back:hover {
+  color: #f05454;
+  cursor: pointer;
+  position: relative;
+}
+
+.col-md-12 input {
+  width: 100%;
+  font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+label {
+  font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+.payment_information {
+  margin: 20px 0;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
+p.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+p.expiry {
+  font-size: 1rem;
+}
+
+.field {
+  width: 100%;
+}
+
+.expiry_month,
+.expiry_year {
+  width: 20%;
+  margin: 0 5px;
+}
+
+.field.cvv {
+  width: 35%;
+  margin-left: 65px;
+}
+
+.field.half {
+  width: 45%;
+  margin: 0 5px;
+}
+
+.action-buttons {
+  text-align: center;
+}
+
+.action-buttons button {
+  margin: 0 5px;
+}
+
+.email-conformation-icon {
+  font-size: 12rem;
+  width: 12rem;
+  height: 12rem;
+  margin: 30px auto;
+  text-align: center;
+  color: #3f51b5!important;
+}
+
+.email-conformation-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.email-conformation-container p {
+  font-family: "Open Sans Condensed", sans-serif !important;
+  font-size: 1.5rem;
+}
+
+.email-conformation-container p.title {
+  font-family: "Open Sans Condensed", sans-serif !important;
+  font-size: 1rem;
+}

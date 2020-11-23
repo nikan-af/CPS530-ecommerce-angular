@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
   typeOfInquiry;
   formSent = false;
 
-  inquiryTypeOptions = { option1: 'Inquiring about a property'};
+  inquiryTypeOptions = { option1: 'Inquiring about a property' };
 
 
   errorMessages = {
@@ -44,27 +44,31 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.contact_form_validations = this.formBuilder.group({
-      first_name: new FormControl('', {validators: Validators.compose([
+      first_name: new FormControl('', {
+        validators: Validators.compose([
           Validators.required,
           Validators.pattern('^[a-zA-Z ]*$')])
-          , updateOn: 'blur'
-        }),
-      last_name: new FormControl('', {validators: Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z ]*$')])
         , updateOn: 'blur'
       }),
-      emailAddress: new FormControl('', {validators: Validators.compose([
-        Validators.required,
-        Validators.pattern(this.emailRX)
+      last_name: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z ]*$')])
+        , updateOn: 'blur'
+      }),
+      emailAddress: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.pattern(this.emailRX)
         ]),
         updateOn: 'blur'
       }),
-      inquiryType: new FormControl('', {validators: Validators.required, updateOn: 'blur'}),
-      messageTextBox: new FormControl('', {validators: Validators.compose([
-        Validators.required,
-        Validators.maxLength(265)
-      ]),
+      inquiryType: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
+      messageTextBox: new FormControl('', {
+        validators: Validators.compose([
+          Validators.required,
+          Validators.maxLength(265)
+        ]),
         updateOn: 'blur'
       }),
       sendEmailToSelf: new FormControl()

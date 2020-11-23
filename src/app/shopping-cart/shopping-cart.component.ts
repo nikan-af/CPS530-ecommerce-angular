@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class ShoppingCartComponent implements OnInit {
 
   cartItems = [];
+  checkout = false;
+  subTotal = 0;
 
   constructor(private dataService: DataService, private dialog: MatDialog) { }
 
@@ -18,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
     this.dataService.cartItemsBehaviourSubject.subscribe(data => {
       console.log(data);
       this.cartItems = data;
+      this.resetTotal();
     });
   }
 
@@ -34,6 +37,17 @@ export class ShoppingCartComponent implements OnInit {
   removeItem(product) {
     this.cartItems.splice(this.cartItems.indexOf(product), 1);
     this.dataService.removeItem(product);
+  }
+
+  onChange(event) {
+    this.resetTotal();
+  }
+
+  resetTotal() {
+    this.subTotal = 0;
+    for (var i = 0; i < this.cartItems.length; i++) {
+      this.subTotal += this.cartItems[i].price * this.cartItems[i].qty;
+    }
   }
 
 }

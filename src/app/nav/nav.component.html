@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['products-women']" routerLinkActive="active" (click)="setProductsGender('F')">Women</a>
             </li>
+            <li class="nav-item" *ngIf="this.userIsLoggedIn">
+                <a class="nav-link" [routerLink]="['orders']" routerLinkActive="active">Orders</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">About Us</a>
             </li>
