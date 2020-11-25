@@ -45,6 +45,7 @@ export class LoginComponent {
         success => {
           this.userWasCreated = true;
           this.userHasSignedUp = true;
+          this.dataService.isLoggedInBehvaiourSubject.next(false);
         },
         fail => {
           console.log(fail);
@@ -54,11 +55,17 @@ export class LoginComponent {
       this.dataService.userlogin(this.tempUser.email, this.tempUser.pwd).subscribe(
         response => {
           console.log(response);
-          this.dataService.tempUser.id = response[0].id;
-          this.dataService.tempUser.email = response[0].email;
-          this.dataService.tempUser.fullName = response[0].fullName;
+          this.dataService.userBehaviorSubject.next(
+            {
+              id: response[0].userId,
+              email: response[0].email,
+              fullName: response[0].fullName,
+              pwd: ''
+            }
+          );
           this.userStatus.emit('loggedIn');
           this.userIsLoggedIn = true;
+          this.dataService.isLoggedInBehvaiourSubject.next(true);
           this.modalService.close(this.content);
           this.toastr.success("Hello " + response[0].fullName + ", you are logged in!");
         },

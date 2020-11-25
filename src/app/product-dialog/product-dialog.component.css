@@ -1,5 +1,4 @@
 img {
-  height: 60vh;
   width: 100%;
 }
 
@@ -50,7 +49,7 @@ li {
 
 .backdrop {
   margin: 0 auto;
-  margin-top: 25vh;
+  margin-top: 29vh;
   text-align: center;
 }
 

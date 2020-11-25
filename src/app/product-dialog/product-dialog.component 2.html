@@ -1,0 +1,73 @@
+<div class="product-container" *ngIf="!this.loading">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="carousel-container">
+        <ngb-carousel interval="3000" style="height: 100%;">
+          <ng-template *ngFor="let image of images" ngbSlide>
+            <img [src]="image.imageURL">
+          </ng-template>
+        </ngb-carousel>
+      </div>
+    </div>
+    <div class="col-md-6 details-container">
+      <div class="details">
+        <div class="h4">{{this.product['productName']}}</div>
+        <div class="h5">CAD {{this.product['price']}}</div>
+        <div class="h5">Colour: {{this.product['colour']}}</div>
+        {{this.productDetails.title}}:
+        <ul>
+          <span *ngFor="let bullet of this.productDetails['bullets']; let i = index">
+            <li *ngIf="i < 6">{{bullet}}</li>
+          </span>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group field-size">
+            <label for="size">Size:</label>
+            <select class="form-control" id="size">
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group field-qty">
+            <label for="qty">Qty:</label>
+            <select class="form-control" id="qty">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>        
+      </div>
+      
+
+      <div class="row actionButtons">
+        <div class="col-md-12">
+          <button mat-raised-button class="resetButton" mat-dialog-close type="submit"><span
+              class="material-icons delete-icon">favorite</span></button>
+          <button mat-raised-button class="saveButton" type="submit" (click)="addToCart()">Add to my
+            cart</button>
+          <p class="error" *ngIf="itemAlreadyAdded">Item is already added to your cart.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop" *ngIf="this.loading">
+  <div class="spinner"></div>
+  <div class="logo">loading...</div>
+</div>

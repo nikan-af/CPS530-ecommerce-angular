@@ -4,6 +4,8 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { ModalService } from '../shared/modal.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'products-component',
@@ -15,9 +17,24 @@ export class ProductsComponent implements OnInit {
     products: any;
     cartItems = [];
     loading = true;
+    gender = "";
+    user;
 
-    constructor(private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService) {
+    constructor(private toastr: ToastrService, private dataService: DataService, private dialog: MatDialog, private modalService: ModalService, private cookieService: CookieService, private route: ActivatedRoute) {
         this.cartItems = JSON.parse(this.cookieService.get("cartItems"));
+        this.dataService.userBehaviorSubject.subscribe(
+            success => {
+                this.user = success;
+            }
+        );
+        // this.dataService.getFavorites(this.user.id).subscribe(
+        //     success => {
+        //         console.log(success);
+        //     },
+        //     fail => {
+        //         console.log(fail);
+        //     }
+        // )
     }
 
     onClick() {
@@ -25,8 +42,8 @@ export class ProductsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.dataService.genderOfProducts);
-        this.dataService.getProducts(this.dataService.genderOfProducts).subscribe(
+        this.gender = this.route.snapshot.url[0].path === 'products-men' ? 'M' : 'F';
+        this.dataService.getProducts(this.gender).subscribe(
             success => {
                 this.products = success;
                 console.log(success);
@@ -39,10 +56,19 @@ export class ProductsComponent implements OnInit {
 
     addToFavorites(product) {
         console.log(product);
-        if (this.dataService.tempUser.email === '') {
+        console.log(this.user)
+        if (this.user.email === '') {
             this.modalService.open(this.dataService.loginRef);
         } else {
             this.dataService.favoriteItems.push(product);
+            this.dataService.addFavorite(this.user.id, product.productId).subscribe(
+                success => {
+                    console.log(success);
+                    this.toastr.success('Item added to your favorites.');
+                }, fail => {
+                    console.log(fail);
+                }
+            );
         }
     }
 
@@ -51,7 +77,7 @@ export class ProductsComponent implements OnInit {
         this.dialog.open(ProductDialogComponent, {
             panelClass: 'custom-dialog-container',
             width: '60vw',
-            height: '60vh',
+            height: '67vh',
             data: product
           });
     }

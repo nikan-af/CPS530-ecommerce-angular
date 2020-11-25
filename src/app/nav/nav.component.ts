@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from '../shared/modal.service';
 import { DataService } from '../shared/data.service';
@@ -16,6 +16,7 @@ export class NavComponent implements AfterViewInit {
     pageName = 'propertyListings';
     userIsLoggedIn = false;
     cartItems = [];
+    @Output() openCart = new EventEmitter();
 
     @ViewChild('content') content: ElementRef;
 
@@ -31,7 +32,6 @@ export class NavComponent implements AfterViewInit {
         if (this.userIsLoggedIn) {
           this.userIsLoggedIn = false;
           this.dataService.logout();
-          console.log(this.dataService.tempUser);
         } else {
           this.modalService.open(content);
         }
@@ -45,5 +45,10 @@ export class NavComponent implements AfterViewInit {
 
     setProductsGender(gender) {
         this.dataService.genderOfProducts = gender;
+    }
+
+    openCartHandler() {
+        // this.dataService.updateShoppingCart
+        this.openCart.emit()
     }
 }

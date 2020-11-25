@@ -8,11 +8,11 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
-        $pwd = mysqli_real_escape_string($mysqli, trim($request->password));
-        $email = mysqli_real_escape_string($mysqli, trim($request->email));
+        $pwd = mysqli_real_escape_string($con, trim($request->password));
+        $email = mysqli_real_escape_string($con, trim($request->email));
         $sql = '';
         $sql = "SELECT * FROM cps530.users where email='$email' and password='$pwd'";
-        if($result = mysqli_query($mysqli,$sql)) {
+        if($result = mysqli_query($con,$sql)) {
             $rows = array();
             while($row = mysqli_fetch_assoc($result)) {
                 $rows[] = $row;

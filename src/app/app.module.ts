@@ -17,6 +17,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ContactComponent } from './contact/contact.component';
 import { AppComponent } from './app.component';
@@ -27,7 +30,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
 
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
-import { ModalService } from './shared/modal.service';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrdersComponent } from './orders/orders.component';
+import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
 
@@ -42,9 +48,14 @@ import { MissionComponent } from './mission/mission.component';
     MaterialElevationDirective,
     ContactComponent,
     ProductDialogComponent,
+    ShoppingCartComponent,
+    CheckoutComponent,
+    OrdersComponent,
+    PremierComponent,
     AboutComponent,
     MissionComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,9 +72,14 @@ import { MissionComponent } from './mission/mission.component';
     MatSelectModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

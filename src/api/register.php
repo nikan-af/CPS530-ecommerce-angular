@@ -8,15 +8,15 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
-        $pwd = mysqli_real_escape_string($mysqli, trim($request->password));
-        $email = mysqli_real_escape_string($mysqli, trim($request->email));
-        $password = mysqli_real_escape_string($mysqli, trim($request->password));
-        $fullName = mysqli_real_escape_string($mysqli, trim($request->fullName));
+        $pwd = mysqli_real_escape_string($con, trim($request->password));
+        $email = mysqli_real_escape_string($con, trim($request->email));
+        $password = mysqli_real_escape_string($con, trim($request->password));
+        $fullName = mysqli_real_escape_string($con, trim($request->fullName));
         $sql = '';
         $sql = "INSERT INTO users(email, fullName, password, createdAt) VALUES('$email', '$fullName', '$password', CURRENT_TIME)";
-        if($result = mysqli_query($mysqli,$sql)) {
+        if($result = mysqli_query($con,$sql)) {
             $sql = "SELECT * FROM cps530.users WHERE email = '$email'";
-            if($result1 = mysqli_query($mysqli,$sql)) {
+            if($result1 = mysqli_query($con,$sql)) {
                 $rows = array();
                 while($row = mysqli_fetch_assoc($result1)) {
                     $rows[] = $row;

@@ -15,8 +15,11 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['products-women']" routerLinkActive="active" (click)="setProductsGender('F')">Women</a>
             </li>
+            <li class="nav-item" *ngIf="this.userIsLoggedIn">
+                <a class="nav-link" [routerLink]="['orders']" routerLinkActive="active">Orders</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['about']" routerLinkActive="active">About Us</a>
+                <a class="nav-link"[routerLink]="['about']" routerLinkActive="active">About Us</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['contact']" routerLinkActive="active">Contact Us</a>
@@ -28,7 +31,7 @@
                     <a class="nav-link item-icon" href="#"><span class="material-icons">favorite_border</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link item-icon" href="#"><span class="material-icons">shopping_basket</span><span class='badge badge-warning' id='lblCartCount' *ngIf="this.dataService.cartItems.length > 0"> {{this.dataService.cartItems.length}} </span></a>
+                    <a class="nav-link item-icon" (click)="this.openCartHandler()"><span class="material-icons">shopping_basket</span><span class='badge badge-warning' id='lblCartCount' *ngIf="this.dataService.cartItems.length > 0"> {{this.dataService.cartItems.length}} </span></a>
                 </li>
                 <li class="nav-item item-icon">
                     <a class="nav-link" (click)="handleLogin(content)"><span *ngIf="!userIsLoggedIn" class="material-icons">account_circle</span><span *ngIf="userIsLoggedIn" class="material-icons">login</span></a>
