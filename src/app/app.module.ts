@@ -34,6 +34,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PremierComponent } from './premier/premier.component';
+import { AboutComponent } from './about/about.component';
+import { MissionComponent } from './mission/mission.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +51,11 @@ import { PremierComponent } from './premier/premier.component';
     ShoppingCartComponent,
     CheckoutComponent,
     OrdersComponent,
-    PremierComponent
+    PremierComponent,
+    AboutComponent,
+    MissionComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
