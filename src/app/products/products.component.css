@@ -33,7 +33,8 @@ p {
 .backdrop {
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 70vh;
+  margin-top: 20vh;
+  margin-bottom: 40vh;
 }
 
 .spinner {
