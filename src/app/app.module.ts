@@ -33,6 +33,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdersComponent } from './orders/orders.component';
+import { PremierComponent } from './premier/premier.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrdersComponent } from './orders/orders.component';
     ProductDialogComponent,
     ShoppingCartComponent,
     CheckoutComponent,
-    OrdersComponent
+    OrdersComponent,
+    PremierComponent
   ],
   imports: [
     BrowserModule,
