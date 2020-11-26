@@ -18,9 +18,17 @@ body {
 }
 
 .mat-drawer-container {
-  margin-top: 80px!important;
+  margin-top: 60px!important;
 }
 
 .modal-content {
   border: none!important;
+}
+
+p {
+  font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+h1 {
+  font-family: "Open Sans Condensed", sans-serif !important;
 }
