@@ -1,8 +1,33 @@
+<app-carousel></app-carousel>
 <div class="container-fluid">
-    <div class="banner-container">
-        <img src="../../assets/images/sales.webp" alt="sales">
-        <div class="p">Laid-back Looks</div>
-        <button type="button" class="btn btn-outline-dark btn-shop">SHOP NOW</button>
+    <div class="featured-collections">
+        <p>Featured Collections</p>
+    </div>
+    <div class="collections">
+        <div class="row">
+            <div class="col-md-6">
+                <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/collection1-2.jpg" alt="collection1"></a>
+            </div>
+            <div class="col-md-6">
+                <a [routerLink]="['products-women']" routerLinkActive="active"><img src="../../assets/images/collection2-2.jpg" alt="collection2"></a>
+            </div>
+        </div>
+        <div class="row collection-description">
+            <div class="col-md-6">
+                <p class="title">Men's Winter Overcoats</p>
+                <p class="subtitle">Classic Looks</p>
+            </div>
+            <div class="col-md-6">
+                <p class="title">Women's Outerwear Jackets</p>
+                <p class="subtitle">Your New Favorite Coat</p>
+            </div>
+        </div>
+    </div>
+    <div class="middle-image">
+        <a [routerLink]="['products-women']" routerLinkActive="active"><img src="../../assets/images/carousel3-2.jpg" alt="fresh looks"></a>
+    </div>
+    <div class="featured-collections">
+        <p>Other Collections</p>
     </div>
     <div class="sample-products">
         <div class="row">
