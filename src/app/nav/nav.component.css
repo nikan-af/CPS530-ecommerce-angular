@@ -1,9 +1,17 @@
+
+
 li {
   white-space: nowrap;
 }
 
 a {
   cursor: pointer;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 1.1rem;
+}
+
+a:hover {
+  color: white;
 }
 
 #logo {

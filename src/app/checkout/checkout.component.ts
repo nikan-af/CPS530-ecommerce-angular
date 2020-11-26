@@ -224,7 +224,7 @@ export class CheckoutComponent implements OnInit {
               this.dataService.resetCart();
               this.messageShown = true;
               this.goBack.emit();
-            }, 6000)
+            }, 3000)
 
           }, fail => {
             console.log(fail);

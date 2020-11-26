@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -52,10 +53,10 @@ import { MissionComponent } from './mission/mission.component';
     CheckoutComponent,
     OrdersComponent,
     PremierComponent,
+    CarouselComponent,
     AboutComponent,
     MissionComponent
   ],
-
   imports: [
     BrowserModule,
     AppRoutingModule,
