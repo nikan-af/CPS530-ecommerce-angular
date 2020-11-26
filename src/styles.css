@@ -26,16 +26,17 @@ body {
 }
 
 p {
-  font-family: "Open Sans Condensed", sans-serif !important;
+  font-family: "Open Sans Condensed", sans-serif!important;
 }
 
 h1 {
-  font-family: "Open Sans Condensed", sans-serif !important;
+  font-family: "Open Sans Condensed", sans-serif!important;
 }
 
-@media only screen and (max-width: 1000px) {
-  .cdk-overlay-pane {
-    width: 80vw!important;
-    height: 60vh!important;
-  }
+h2 {
+  font-family: "Open Sans Condensed", sans-serif!important;
+}
+
+h3 {
+  font-family: "Open Sans Condensed", sans-serif!important;
 }
