@@ -6,6 +6,10 @@
   margin: 30px 0;
 }
 
+.products .col-md-4 {
+  margin: 20px 0;
+}
+
 .products .mat-card {
   cursor: pointer;
 }

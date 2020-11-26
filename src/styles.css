@@ -16,3 +16,11 @@ body {
   padding: 10px;
   color: red;
 }
+
+.mat-drawer-container {
+  margin-top: 80px!important;
+}
+
+.modal-content {
+  border: none!important;
+}
