@@ -37,6 +37,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
+import { SecurityComponent } from './security/security.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MissionComponent } from './mission/mission.component';
     PremierComponent,
     CarouselComponent,
     AboutComponent,
-    MissionComponent
+    MissionComponent,
+    SecurityComponent
   ],
   imports: [
     BrowserModule,
