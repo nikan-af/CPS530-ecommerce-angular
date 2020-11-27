@@ -1,0 +1,19 @@
+.content{
+    padding: 2% 20% 2%;
+    text-align: center;
+    font-family: 'Asap Condensed', sans-serif;
+    background-color: white;
+}
+h1{
+    font-size: 64px;
+}
+body{
+    padding-top: 2%;
+    font-size: 20px;
+    
+}
+a{
+    color: black;
+    text-decoration: underline;
+}
+
