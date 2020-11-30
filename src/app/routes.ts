@@ -8,6 +8,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
+import { HelpComponent } from './help/help.component';
 import { SecurityComponent } from './security/security.component';
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'premier', component: PremierComponent },
   { path: 'about', component: AboutComponent },
   { path: 'mission', component: MissionComponent },
+  { path: 'help', component: HelpComponent },
   { path: 'security', component: SecurityComponent },
   { path: '**', component: MainComponent }
 ];

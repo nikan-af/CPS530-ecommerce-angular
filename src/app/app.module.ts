@@ -38,6 +38,7 @@ import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
 import { SecurityComponent } from './security/security.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { SecurityComponent } from './security/security.component';
     CarouselComponent,
     AboutComponent,
     MissionComponent,
+    HelpComponent,
     SecurityComponent
   ],
   imports: [
