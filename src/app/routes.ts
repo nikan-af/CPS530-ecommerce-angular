@@ -9,6 +9,7 @@ import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { SecurityComponent } from './security/security.component';
 
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'mission', component: MissionComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'security', component: SecurityComponent },
   { path: '**', component: MainComponent }
 ];
