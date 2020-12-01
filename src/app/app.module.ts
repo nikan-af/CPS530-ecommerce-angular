@@ -37,6 +37,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PremierComponent } from './premier/premier.component';
 import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 import { SecurityComponent } from './security/security.component';
 import { HelpComponent } from './help/help.component';
 
@@ -58,7 +59,11 @@ import { HelpComponent } from './help/help.component';
     CarouselComponent,
     AboutComponent,
     MissionComponent,
+<<<<<<< HEAD
     HelpComponent,
+=======
+    FavoritesComponent,
+>>>>>>> ba6e61887921d03ad80f773918587102dae394ff
     SecurityComponent
   ],
   imports: [

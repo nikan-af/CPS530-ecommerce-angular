@@ -49,6 +49,18 @@
   font-size: 1rem;
 }
 
+.no-history {
+  margin: 35vh 0;
+  margin-bottom: 50vh;
+  width: 100%;
+  color: #686870d0;
+  text-align: center;
+}
+
+.no-history h1 {
+  font-size: 3rem;
+}
+
 @media only screen and (min-width: 900px) and (max-width: 1200px) {
     .container-fluid {
         width: 90%;

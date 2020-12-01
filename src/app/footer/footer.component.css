@@ -64,3 +64,13 @@
     width: 35px;
     margin-right: 10px;
 }
+
+@media only screen and (max-width: 770px) {
+  .container .col-sm-6.col-md-3 {
+    text-align: center;
+  }
+
+  .container h6 {
+    text-align: center;
+  }
+}

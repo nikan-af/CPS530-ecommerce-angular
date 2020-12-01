@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="!this.loading">
+<div class="container-fluid" *ngIf="!this.loading && !this.noOrderHistory">
     <h1 class="title">ORDER HISTORY</h1>
     <div class="order" *ngFor="let order of reverseList | keyvalue">
         <h3>{{order.key}}</h3>
@@ -18,6 +18,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="this.noOrderHistory" class="no-history">
+    <h1>NO ORDER HISTORY</h1>
 </div>
 
 <div class="backdrop" *ngIf="this.loading">

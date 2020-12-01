@@ -6,14 +6,19 @@
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i].imageURL}}
                             alt={{products[i].productName}}></div>
                     <mat-card-content class="mat-content">
-                        <a (click)="addToFavorites(products[i]); $event.stopPropagation()"><span
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i].productId) < 0"
+                            (click)="addToFavorites(products[i]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i].productId) >= 0"
+                            (click)="removeFromFavorites(products[i]); $event.stopPropagation()"><span
+                                class="material-icons delete-icon favorite-red">favorite</span></a>
                         <p>
-                            {{products[i].productName}}
-                        </p>
-                        <p class="price">
-                            CAD {{products[i].price}}
-                        </p>
+                            <p>
+                                {{products[i].productName}}
+                            </p>
+                            <p class="price">
+                                CAD {{products[i].price}}
+                            </p>
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -22,8 +27,12 @@
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+1].imageURL}}
                             alt={{products[i+1].productName}}></div>
                     <mat-card-content class="mat-content">
-                        <a (click)="addToFavorites(products[i+1]); $event.stopPropagation()"><span
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i+1].productId) < 0"
+                            (click)="addToFavorites(products[i+1]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i+1].productId) >= 0"
+                            (click)="removeFromFavorites(products[i+1]); $event.stopPropagation()"><span
+                                class="material-icons delete-icon favorite-red">favorite</span></a>
                         <p>
                             {{products[i+1].productName}}
                         </p>
@@ -38,8 +47,12 @@
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+2].imageURL}}
                             alt={{products[i+2].productName}}></div>
                     <mat-card-content class="mat-content">
-                        <a (click)="addToFavorites(products[i+2]); $event.stopPropagation()"><span
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i+2].productId) < 0"
+                            (click)="addToFavorites(products[i+2]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>
+                        <a *ngIf="this.favoriteProducts.indexOf(this.products[i+2].productId) >= 0"
+                            (click)="removeFromFavorites(products[i+2]); $event.stopPropagation()"><span
+                                class="material-icons delete-icon favorite-red">favorite</span></a>
                         <p>
                             {{products[i+2].productName}}
                         </p>

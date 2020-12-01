@@ -12,6 +12,7 @@
 
 .products .mat-card {
   cursor: pointer;
+  height: 100%;
 }
 
 p {
@@ -28,7 +29,7 @@ p {
   font-size: 2rem;
 }
 
-.delete-icon:hover {
+.delete-icon:hover, .favorite-red {
   color: #f05454;
 }
 

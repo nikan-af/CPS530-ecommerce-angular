@@ -1,0 +1,67 @@
+<div class="container-fluid" *ngIf="!this.loading && !this.noFavorites">
+    <h1 class="title">YOUR FAVORITE PRODUCTS</h1>
+    <div class="products">
+        <div *ngFor="let product of favoriteProducts; let i = index">
+            <div class="row" *ngIf="i % 3 === 0">
+                <div class="col-md-4" *ngIf="i < favoriteProducts.length" (click)="this.openProductDialog(favoriteProducts[i])">
+                    <mat-card appMaterialElevation class="example-card">
+                        <div class="card-image"><img raisedElevation="16" mat-card-image src={{favoriteProducts[i].imageURL}}
+                                alt={{favoriteProducts[i].productName}}></div>
+                        <mat-card-content class="mat-content">
+                            <a (click)="removeFromFavorites(favoriteProducts[i]); $event.stopPropagation()"><span
+                                class="material-icons delete-icon">clear</span></a>
+                            <p>
+                                <p>
+                                    {{favoriteProducts[i].productName}}
+                                </p>
+                                <p class="price">
+                                    CAD {{favoriteProducts[i].price}}
+                                </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-md-4" *ngIf="i + 1 < favoriteProducts.length" (click)="this.openProductDialog(favoriteProducts[i+1])">
+                    <mat-card appMaterialElevation class="example-card">
+                        <div class="card-image"><img raisedElevation="16" mat-card-image src={{favoriteProducts[i+1].imageURL}}
+                                alt={{favoriteProducts[i+1].productName}}></div>
+                        <mat-card-content class="mat-content">
+                            <a (click)="removeFromFavorites(favoriteProducts[i+1]); $event.stopPropagation()"><span
+                                class="material-icons delete-icon">clear</span></a>
+                            <p>
+                                {{favoriteProducts[i+1].productName}}
+                            </p>
+                            <p class="price">
+                                CAD {{favoriteProducts[i+1].price}}
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-md-4" *ngIf="i + 2 < favoriteProducts.length" (click)="this.openProductDialog(favoriteProducts[i+2])">
+                    <mat-card appMaterialElevation class="example-card">
+                        <div class="card-image"><img raisedElevation="16" mat-card-image src={{favoriteProducts[i+2].imageURL}}
+                                alt={{favoriteProducts[i+2].productName}}></div>
+                        <mat-card-content class="mat-content">
+                            <a (click)="removeFromFavorites(favoriteProducts[i+2]); $event.stopPropagation()"><span
+                                    class="material-icons delete-icon">clear</span></a>
+                            <p>
+                                {{favoriteProducts[i+2].productName}}
+                            </p>
+                            <p class="price">
+                                CAD {{favoriteProducts[i+2].price}}
+                            </p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.noFavorites" class="no-history">
+    <h1>NO FAVORITES</h1>
+</div>
+
+<div class="backdrop" *ngIf="this.loading">
+    <div class="spinner"></div>
+    <div class="logo">loading...</div>
+</div>
