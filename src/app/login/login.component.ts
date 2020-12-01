@@ -63,6 +63,24 @@ export class LoginComponent {
               pwd: ''
             }
           );
+          this.dataService.getPaymentInfo(response[0].userId).subscribe(
+            success => {
+              console.log(success);
+              console.log(success[0]);
+              this.dataService.paymentInfoBehaviourService.next(success[0]);
+            }, fail => {
+              console.log(fail);
+            }
+          )
+          this.dataService.getOrders(response[0].userId).subscribe(
+            success => {
+              console.log(success);
+              console.log(success[0]);
+              this.dataService.ordersInfoBehaviourSubject.next(success);
+            }, fail => {
+              console.log(fail);
+            }
+          )
           this.userStatus.emit('loggedIn');
           this.userIsLoggedIn = true;
           this.dataService.isLoggedInBehvaiourSubject.next(true);

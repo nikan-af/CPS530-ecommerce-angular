@@ -7,9 +7,17 @@
         <div class="row">
             <div class="col-md-6">
                 <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/collection1-2.jpg" alt="collection1"></a>
+                <div class="hidden-description">
+                    <p class="title">Men's Winter Overcoats</p>
+                    <p class="subtitle">Classic Looks</p>
+                </div>
             </div>
             <div class="col-md-6">
                 <a [routerLink]="['products-women']" routerLinkActive="active"><img src="../../assets/images/collection2-2.jpg" alt="collection2"></a>
+                <div class="hidden-description">
+                    <p class="title">Women's Outerwear Jackets</p>
+                    <p class="subtitle">Your New Favorite Coat</p>
+                </div>
             </div>
         </div>
         <div class="row collection-description">
@@ -31,20 +39,20 @@
     </div>
     <div class="sample-products">
         <div class="row">
-            <div class="col-md-3" (click)="onClick()">
-                <img src="../../assets/images/workout.webp" alt="Workout Clothing">
+            <div class="col-xs-3 col-sm-3 col-md-3" (click)="onClick()">
+                <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/workout.webp" alt="Workout Clothing"></a>
                 <h2>WORKOUT CLOTHES</h2>
             </div>
-            <div class="col-md-3" (click)="onClick()">
-                <img src="../../assets/images/logo-clothes.webp" alt="Logo Clothes">
+            <div class="col-xs-3 col-sm-3 col-md-3" (click)="onClick()">
+                <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/logo-clothes.webp" alt="Logo Clothes"></a>
                 <h2>LOGO LOOKS</h2>
             </div>
-            <div class="col-md-3" (click)="onClick()">
-                <img src="../../assets/images/best-boots.webp" alt="Best Boots">
+            <div class="col-xs-3 col-sm-3 col-md-3" (click)="onClick()">
+                <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/best-boots.webp" alt="Best Boots"></a>
                 <h2>BEST BOOTS</h2>
             </div>
-            <div class="col-md-3" (click)="onClick()">
-                <img src="../../assets/images/overshirts.jpg" alt="Overshirts">
+            <div class="col-xs-3 col-sm-3 col-md-3" (click)="onClick()">
+                <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/overshirts.jpg" alt="Overshirts"></a>
                 <h2>OVERSHIRTS</h2>
             </div>
         </div>

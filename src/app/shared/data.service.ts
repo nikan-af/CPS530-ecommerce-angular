@@ -15,10 +15,33 @@ export class DataService {
     cartItemsBehaviourSubject: BehaviorSubject<any>;
     isLoggedInBehvaiourSubject: BehaviorSubject<any>;
     userBehaviorSubject: BehaviorSubject<User>;
+    userFavoritesBehaviourSubject: BehaviorSubject<any>;
+    paymentInfoBehaviourService: BehaviorSubject<any>;
+    ordersInfoBehaviourSubject: BehaviorSubject<any>;
 
     loginRef: ElementRef;
     favoriteItems = [];
     loggedIn = false;
+    orders = [];
+    paymentInfo:any = {
+        orderId: '',
+        userId: '',
+        productId: '',
+        qty: '',
+        orderTimestamp: '',
+        credit_card_number: '',
+        credit_card_holder: '',
+        expiry_month: '',
+        expiry_year: '', 
+        credit_card_first_name: '', 
+        credit_card_last_name: '', 
+        credit_card_address_line_1: '', 
+        credit_card_address_line_2: '', 
+        country: '', 
+        province: '', 
+        city: '', 
+        postal_code: ''
+    };
     tempUser: User = {
         id: 0,
         email: '',
@@ -29,6 +52,9 @@ export class DataService {
     genderOfProducts = '';
  
     redirectUrl: string;
+    /* PROD 
+    baseUrl: string = "http://3.12.38.160/api";
+    */
     baseUrl: string = "http://localhost:8080/api";
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
     constructor(private httpClient: HttpClient, private cookieService: CookieService) { 
@@ -41,6 +67,10 @@ export class DataService {
         this.cartItemsBehaviourSubject = new BehaviorSubject<any>(this.cartItems);
         this.isLoggedInBehvaiourSubject = new BehaviorSubject<any>(this.loggedIn);
         this.userBehaviorSubject = new BehaviorSubject<any>(this.tempUser);
+        this.userFavoritesBehaviourSubject = new BehaviorSubject<any>(this.favoriteItems);
+        this.paymentInfoBehaviourService = new BehaviorSubject<any>(this.paymentInfo);
+        this.ordersInfoBehaviourSubject = new BehaviorSubject<any>(this.orders);
+
         this.userBehaviorSubject.next(this.tempUser);
     }
 
@@ -78,6 +108,12 @@ export class DataService {
 
     getProducts(gender) {
         return this.httpClient.post(this.baseUrl + '/products.php', {'gender': gender});
+    }
+
+    removeFromFavorites(userId, productId) {
+        console.log(userId);
+        console.log(productId);
+        return this.httpClient.post(this.baseUrl + '/removeFromFavorites.php', { 'userId': `${userId}`, 'productId': `${productId}` });
     }
 
     getImages(productId) {
@@ -134,7 +170,12 @@ export class DataService {
     }
 
     recordPurchase(formData) {
+        console.log(formData);
         return this.httpClient.post(this.baseUrl + '/recordPurchase.php', {...formData});
+    }
+
+    getPaymentInfo(userId) {
+        return this.httpClient.post(this.baseUrl + '/getPaymentInfo.php', { "userId":userId });
     }
 
     getOrders(userId) {
@@ -149,6 +190,10 @@ export class DataService {
 
     getFavorites(userId) {
         return this.httpClient.post(this.baseUrl + '/getFavorites.php', {"userId":userId});
+    }
+
+    getFavoriteProducts(userId) {
+        return this.httpClient.post(this.baseUrl + '/getFavoriteProducts.php', { "userId":userId });
     }
 
     isLoggedIn() {

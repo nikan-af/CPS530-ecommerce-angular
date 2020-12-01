@@ -9,6 +9,7 @@ import { DataService } from '../shared/data.service';
 export class OrdersComponent implements OnInit {
 
   loading = true;
+  noOrderHistory: Boolean;
   user;
   orders;
   orderByDate: any[] = [];
@@ -22,24 +23,39 @@ export class OrdersComponent implements OnInit {
       }
     );
 
+    this.dataService.ordersInfoBehaviourSubject.subscribe(
+      success => {
+        this.processData(success);
+      }
+    )
+
     this.dataService.getOrders(this.user.id).subscribe(
       success => {
-        console.log(success);
-        this.orders = success;
-        this.orders.map(order => {
-          if (!this.orderByDate[`${order.timestamp}`]) {
-            this.orderByDate[`${order.timestamp}`] = [];
-          }
-          this.orderByDate[`${order.timestamp}`].push(order);
-        });
-        console.log(this.orderByDate);
-        this.reverseList = this.orderByDate.reverse();
-        this.loading = false;
+        this.processData(success);
       },
       fail => {
         console.log(fail);
       }
     )
+  }
+
+  processData(success) {
+    this.orders = success as [];
+    console.log(this.orders);
+    this.orderByDate = [];
+    this.orders.map(order => {
+      if (!this.orderByDate[`${order.timestamp}`]) {
+        this.orderByDate[`${order.timestamp}`] = [];
+      }
+      this.orderByDate[`${order.timestamp}`].push(order);
+    });
+    if (this.orders.length === 0) {
+      this.noOrderHistory = true;
+    } else {
+      this.noOrderHistory = false;
+    }
+    this.reverseList = this.orderByDate.reverse();
+    this.loading = false;
   }
 
 }

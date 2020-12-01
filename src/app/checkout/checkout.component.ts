@@ -25,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   user: User;
   messageShown = false;
 
+  credit_card_number: string;
   expiry_month = '1';
   years;
   months;
@@ -202,10 +203,38 @@ export class CheckoutComponent implements OnInit {
         this.generateSuggestions(value);
       }, 300);
     })
+
+    this.dataService.paymentInfoBehaviourService.subscribe(
+      success => {
+        if (success) {
+          var cc = success.credit_card_number;
+          var masked = '************' + cc.substr(-4);
+          this.checkout_validations.controls['credit_card_number'].setValue(success.credit_card_number);
+          this.checkout_validations.controls['credit_card_address_line_1'].setValue(success['credit_card_address_line_1']);
+          this.checkout_validations.controls['credit_card_address_line_2'].setValue(success['credit_card_address_line_2']);
+          this.checkout_validations.controls['expiry_month'].setValue(success['expiry_month']);
+          this.checkout_validations.controls['expiry_year'].setValue(success['expiry_year']);
+          this.checkout_validations.controls['credit_card_first_name'].setValue(success['credit_card_first_name']);
+          this.checkout_validations.controls['credit_card_last_name'].setValue(success['credit_card_last_name']);
+          this.checkout_validations.controls['credit_card_holder'].setValue(success['credit_card_holder']);
+          this.checkout_validations.controls['country'].setValue(success['country']);
+          this.checkout_validations.controls['city'].setValue(success['city']);
+          this.checkout_validations.controls['province'].setValue(success['province']);
+          this.checkout_validations.controls['postal_code'].setValue(success['postal_code']);
+          this.postcode = success['postal_code'];
+          this.city = success['city'];
+          this.country = success['country'];
+          this.state = success['province'];
+          // this.credit_card_number = masked;
+        }
+      }
+    );
   }
 
   submit() {
+    
     if (this.checkout_validations.valid) {
+      console.log('here');
       if (this.loggedIn) {
         let formValues = { 'credit_card_number': '', 'credit_card_holder': '', 'expiry_month': '', 'expiry_year': '', 'credit_card_first_name': '', 'credit_card_last_name': '', 'credit_card_address_line_1': '', 'credit_card_address_line_2': '', 'country': '', 'province': '', 'city': '', 'postal_code': '' };
         for (const field in this.checkout_validations.controls) {
@@ -218,14 +247,7 @@ export class CheckoutComponent implements OnInit {
         this.dataService.recordPurchase(formValues).subscribe(
           success => {
             this.purchaseComplete = true;
-            setTimeout(() => {
-              console.log('here');
-              this.dataService.cartItemsBehaviourSubject.next([]);
-              this.dataService.resetCart();
-              this.messageShown = true;
-              this.goBack.emit();
-            }, 3000)
-
+            this.resetCheckoutForm();
           }, fail => {
             console.log(fail);
           }
@@ -237,6 +259,7 @@ export class CheckoutComponent implements OnInit {
         this.purchaseComplete = true;
       } else {
         this.purchaseComplete = true;
+        this.resetCheckoutForm();
       }
     }
   }
@@ -304,6 +327,16 @@ export class CheckoutComponent implements OnInit {
   private generateLongAddress(properties: GeocodingFeatureProperties): string {
     let fullAddress = properties.formatted;
     return fullAddress;
+  }
+
+  resetCheckoutForm() {
+    setTimeout(() => {
+      console.log('here');
+      this.dataService.cartItemsBehaviourSubject.next([]);
+      this.dataService.resetCart();
+      this.messageShown = true;
+      this.goBack.emit();
+    }, 3000)
   }
 
   openLogin() {

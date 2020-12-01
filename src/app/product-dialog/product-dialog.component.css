@@ -9,7 +9,7 @@ img {
 
 .details-container {
   padding: 20px;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   font-size: 1.2rem;
   overflow-y: visible;
 }
@@ -19,13 +19,13 @@ img {
 }
 
 .h4 {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   margin-top: 30px;
   font-size: 1.2rem;
 }
 
 .h5 {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 1.2rem;
@@ -49,7 +49,7 @@ li {
 
 .backdrop {
   margin: 0 auto;
-  margin-top: 29vh;
+  margin: 35vh 0;
   text-align: center;
 }
 
@@ -71,53 +71,69 @@ li {
 @keyframes spin {
   0% {
     transform: rotate(0deg);
-    border-left:8px solid #26191b;
+    border-left: 8px solid #26191b;
   }
 
-  25%{
+  25% {
     transform: rotate(360deg);
-    border-left:8px solid #f9b384;
+    border-left: 8px solid #f9b384;
   }
 
-  50%{
-    transform:rotate(720deg);
-    border-left:8px solid #26191b;
+  50% {
+    transform: rotate(720deg);
+    border-left: 8px solid #26191b;
   }
 
-  75%{
+  75% {
     transform: rotate(1080deg);
-    border-left:8px solid #f9b384;
+    border-left: 8px solid #f9b384;
   }
 
   100% {
     transform: rotate(1440deg);
-    border-left:8px solid #26191b;
+    border-left: 8px solid #26191b;
   }
-
 }
 
 .logo {
   margin-top: 5px;
-  letter-spacing:0.06em;
+  letter-spacing: 0.06em;
   font-size: 0.8rem;
 }
 
 .field {
   margin: 1.5vh 2.5%;
   width: 33%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.field-size {
+  float: left;
+  padding-left: 0px !important;
+}
+
+.field-qty {
+  float: right;
+  padding-left: 0px !important;
+  padding-right: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .details-container {
+    padding: 40px;
   }
 
-  .form-group {
-    width: 100%;
-  }
-
-  .field-size {
-    float: left;
-    padding-left: 0px!important;
+  .field {
+    margin: 0px 0px;
+    width: 33%;
   }
 
   .field-qty {
     float: right;
-    padding-left: 0px!important;
-    padding-right: 20px;
+    padding-left: 0px !important;
+    padding-right: 0px;
   }
+}
