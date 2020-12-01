@@ -35,6 +35,19 @@ export class FavoritesComponent implements OnInit {
         console.log(fail);
       }
     )
+
+    this.dataService.userFavoritesBehaviourSubject.subscribe(
+      data => {
+        console.log(data);
+        this.favoriteProducts = data as [];
+        console.log(this.favoriteProducts);
+        if (this.favoriteProducts.length > 0) {
+          this.noFavorites = false;
+        } else {
+          this.noFavorites = true;
+        }
+      }
+    )
   }
 
   openProductDialog(product) {

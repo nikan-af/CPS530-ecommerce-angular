@@ -96,6 +96,7 @@ export class DataService {
     }
 
     logout() {
+        console.log('here12');
         this.userBehaviorSubject.next(
             {
                 id: 0,
@@ -104,6 +105,28 @@ export class DataService {
                 email: ''
             }
         );
+        this.paymentInfoBehaviourService.next(
+            {orderId: '',
+            userId: '',
+            productId: '',
+            qty: '',
+            orderTimestamp: '',
+            credit_card_number: '',
+            credit_card_holder: '',
+            expiry_month: '',
+            expiry_year: '', 
+            credit_card_first_name: '', 
+            credit_card_last_name: '', 
+            credit_card_address_line_1: '', 
+            credit_card_address_line_2: '', 
+            country: '', 
+            province: '', 
+            city: '', 
+            postal_code: ''}
+        );
+        this.userFavoritesBehaviourSubject.next([]);
+        this.isLoggedInBehvaiourSubject.next(false);
+
     }
 
     getProducts(gender) {

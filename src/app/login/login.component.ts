@@ -81,6 +81,14 @@ export class LoginComponent {
               console.log(fail);
             }
           )
+          this.dataService.getFavoriteProducts(response[0].userId).subscribe(
+            success => {
+              console.log(success);
+              this.dataService.userFavoritesBehaviourSubject.next(success);
+            }, fail => {
+              console.log(fail);
+            }
+          )
           this.userStatus.emit('loggedIn');
           this.userIsLoggedIn = true;
           this.dataService.isLoggedInBehvaiourSubject.next(true);

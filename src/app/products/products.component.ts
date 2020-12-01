@@ -44,35 +44,37 @@ export class ProductsComponent implements OnInit {
 
         this.dataService.userBehaviorSubject.subscribe(
             success => {
-                console.log('here');
+                console.log(success);
                 this.user = success;
                 this.loading = true;
                 this.getFavorites();
             }
         );
 
-        // this.dataService.userFavoritesBehaviourSubject.subscribe((success) => {
-        //     this.favoriteItems = success;
-        //     if (this.products) {
-        //         for (let i = 0; i < this.favoriteItems.length; i++) {
-        //             for (let j = 0; j < this.products.length; j++) {
-        //                 if (this.products[j].productId === this.favoriteItems[i].productId) {
-        //                     this.favoriteProducts.push(this.products[j]['productId']);
-        //                 }
-        //             }
-        //         }
-        //         console.log(this.favoriteItems);
-        //     }
+        this.dataService.userFavoritesBehaviourSubject.subscribe((success) => {
+            this.favoriteItems = success as [];
+            this.favoriteProducts = [];
+            if (this.favoriteItems.length > 0) {
+                for (let i = 0; i < this.favoriteItems.length; i++) {
+                    for (let j = 0; j < this.products.length; j++) {
+                        if (this.products[j].productId === this.favoriteItems[i].productId) {
+                            this.favoriteProducts.push(this.products[j]['productId']);
+                        }
+                    }
+                }
+                console.log(this.favoriteItems);
+            }
 
-        //     console.log(this.products);
-        //     console.log(this.favoriteItems[this.products[2]['productId']])
-        // })
+            console.log(this.products);
+            console.log(this.favoriteItems[this.products[2]['productId']])
+        })
     }
 
     getFavorites() {
         this.dataService.getFavorites(this.user.id).subscribe(
             success => {
                 this.favoriteItems = success;
+                this.favoriteProducts = [];
                 this.dataService.userFavoritesBehaviourSubject.next(success);
                 if (this.products) {
                     for (let i = 0; i < this.favoriteItems.length; i++) {
