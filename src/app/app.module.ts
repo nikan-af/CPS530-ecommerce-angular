@@ -39,6 +39,7 @@ import { AboutComponent } from './about/about.component';
 import { MissionComponent } from './mission/mission.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SecurityComponent } from './security/security.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SecurityComponent } from './security/security.component';
     AboutComponent,
     MissionComponent,
     FavoritesComponent,
-    SecurityComponent
+    SecurityComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

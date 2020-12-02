@@ -1,0 +1,42 @@
+.content{
+    text-align: left;
+    padding-top: 1%;
+    font-family: 'Asap Condensed', sans-serif;
+}
+p{
+    overflow-wrap: break-word;
+    padding: .5% 50% .5% .5%;
+    font-size: large;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+}
+h1{
+padding-top: 2%;
+font-size: 3rem;
+font-weight: bold;
+font-weight: 550;
+}
+h2{
+font-size: 2rem;
+font-weight: bold;
+font-weight: 550;
+}
+h3{
+    font-size: 1rem;
+    font-weight: bold;
+    font-weight: 550;
+    }
+img{
+    padding: 1% 1%;
+}
+
+#aboutus{
+padding-bottom: 2%;
+display: none;
+margin-bottom: 100px;
+}
+@media screen and (min-width:860px){
+    #aboutus{
+        display: inline-block;
+    }
+}
