@@ -1,0 +1,28 @@
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+.wrapper-box{
+    margin-top: 5%;
+    font-family: "Open Sans Condensed", sans-serif !important;
+    overflow-x: hidden !important;
+
+}
+
+.title{
+    font-size: 30px;
+    font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+.description{
+    font-size: 18px;
+    font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+.labeltext{
+    font-size: 20px;
+    font-family: "Open Sans Condensed", sans-serif !important;
+}
