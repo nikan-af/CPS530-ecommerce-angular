@@ -5,6 +5,10 @@ html{
     font-family: "Open Sans Condensed", sans-serif !important;
 }
 
+.wrapper-box {
+    height: 70vh;
+}
+
 .wrapper-box{
     margin-top: 5%;
     font-family: "Open Sans Condensed", sans-serif !important;
