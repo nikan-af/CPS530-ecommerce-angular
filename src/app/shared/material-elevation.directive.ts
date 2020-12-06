@@ -1,5 +1,8 @@
 import { Directive, ElementRef, HostListener, Input, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
 
+/**
+ * This is the code we have used to implement the card raised elevation on hover using Angular.
+ */
 @Directive({
   selector: '[appMaterialElevation]'
 })

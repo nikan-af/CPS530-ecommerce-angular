@@ -1,47 +1,59 @@
-<br>
-<div class="wrapper-box">
-    <div class="container">
-      <h2 class="text-center mb-5 title font-weight-bold">STUDENTS GET 10% OFF</h2>
-      <p class="text-center description">Complete the form below and we'll send you your unique student discount code - 
-          valid until you graduate. Happy shopping!</p>
+<div class="wrapper-box" *ngIf="!formSent">
+  <div class="container">
+    <h2 class="text-center mb-5 title font-weight-bold">STUDENTS GET 10% OFF</h2>
+    <p class="text-center description">Complete the form below and we'll send you your unique student discount code -
+      valid until you graduate. Happy shopping!</p>
+    <br>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="discount_form_validations" (ngSubmit)="this.submit()">
+          <div>
+            <label class="font-weight-bold labeltext" for="email">STUDENT EMAIL</label>
+            <input class="form-control" name="email" placeholder="Enter Student Email" formControlName="email" />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <mat-error *ngFor="let validation of errorMessages.email">
+              <p
+                *ngIf="this.discount_form_validations.get('email').hasError(validation.type) && (this.discount_form_validations.get('email').dirty || this.discount_form_validations.get('email').touced)">
+                {{validation.message}}</p>
+            </mat-error>
+          </div>
           <br>
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form>
-            <div>
-              <label class="font-weight-bold labeltext" for="Email">STUDENT EMAIL</label>
-              <input
-                type="email"
-                class="form-control"
-                name="Email"
-                placeholder="Enter Student Email"
-              />
-              <small id="emailHelp" class="form-text text-muted"
-                >We'll never share your email with anyone else.</small
-              >
-            </div>
-            <br>
-            <div>
-              <label class="font-weight-bold labeltext" for="fullname">FULL NAME</label>
-              <input
-                type="text"
-                class="form-control"
-                name="Fullname"
-                placeholder="Full Name"
-              />
-            </div>
-            <br>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-dark text-center">
-                SUBMIT
-                </button>
-            </div>
-          </form>
-        </div>
+          <div>
+            <label class="font-weight-bold labeltext" for="fullname">FULL NAME</label>
+            <input class="form-control" name="fullname" placeholder="Full Name" formControlName="fullname" />
+            <mat-error *ngFor="let validation of errorMessages.fullname">
+              <p
+                *ngIf="this.discount_form_validations.get('fullname').hasError(validation.type) && (this.discount_form_validations.get('fullname').dirty || this.discount_form_validations.get('fullname').touced)">
+                {{validation.message}}</p>
+            </mat-error>
+          </div>
+          <br>
+          <div>
+            <label class="font-weight-bold labeltext" for="fullname">SCHOOL NAME</label>
+            <input class="form-control" name="schoolName" placeholder="School Name" formControlName="schoolName" />
+            <mat-error *ngFor="let validation of errorMessages.schoolName">
+              <p
+                *ngIf="this.discount_form_validations.get('schoolName').hasError(validation.type) && (this.discount_form_validations.get('schoolName').dirty || this.discount_form_validations.get('schoolName').touced)">
+                {{validation.message}}</p>
+            </mat-error>
+          </div>
+          <br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-dark text-center">
+              SUBMIT
+            </button>
+          </div>
+        </form>
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
   </div>
+</div>
+
+<!-- Shows the confirmation message if the registration is successful -->
+<div class="purchaseComplete" *ngIf="this.formSent">
+  <div class="container-fluid email-conformation-container">
+    <mat-icon class="email-conformation-icon">check_circle_outline</mat-icon>
+    <p>We have received your student discount request</p>
+    <p class="title">Once approved we'll get back with an email confirmation.</p>
+  </div>
+</div>

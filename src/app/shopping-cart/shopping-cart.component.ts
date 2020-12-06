@@ -16,16 +16,21 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private dataService: DataService, private dialog: MatDialog) { }
 
+  /**
+   * Upon initializing sets event listener on cartItems.
+   */
   ngOnInit(): void {
     this.dataService.cartItemsBehaviourSubject.subscribe(data => {
-      console.log(data);
       this.cartItems = data;
       this.resetTotal();
     });
   }
 
+  /**
+   * Opens the product dialog and passes in the product object as parameter.
+   * @param product 
+   */
   openProductDialog(product) {
-    console.log(product);
     this.dialog.open(ProductDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '60vw',
@@ -34,15 +39,26 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
+  /**
+   * Takes product object and removes the product from the cartItems array and from the cookie.
+   * @param product 
+   */
   removeItem(product) {
     this.cartItems.splice(this.cartItems.indexOf(product), 1);
     this.dataService.removeItem(product);
   }
 
+  /**
+   * Resets the total when the user removes or adds items to the cart.
+   * @param event 
+   */
   onChange(event) {
     this.resetTotal();
   }
 
+  /**
+   * Iterates over the cart items and recalculates the total price.
+   */
   resetTotal() {
     this.subTotal = 0;
     for (var i = 0; i < this.cartItems.length; i++) {

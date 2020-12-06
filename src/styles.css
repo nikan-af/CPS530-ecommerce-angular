@@ -40,3 +40,24 @@ h2 {
 h3 {
   font-family: "Open Sans Condensed", sans-serif!important;
 }
+
+@media only screen and (max-width: 770px) {
+  .cdk-overlay-pane.custom-dialog-container {
+    max-width: 90vw!important;
+    max-height: 80vh!important;
+  }
+
+  .mat-raised-button.saveButton {
+    margin: 10px!important;
+    width: 110px!important;
+    font-size: 10px!important;
+  }
+
+  .mat-raised-button.resetButton {
+    width: 50px!important;
+  }
+
+  .actionButtons button {
+    margin: 0!important;
+  }
+}

@@ -15,10 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
 
   @Input() content: ElementRef;
+
+  // Once the user logs in emits the event to the parent component.
   @Output() userStatus: EventEmitter<any> = new EventEmitter();
 
   constructor(private dataService: DataService, private toastr: ToastrService, private modalService: ModalService) {
-
   }
 
   tempUser: User = {
@@ -33,12 +34,20 @@ export class LoginComponent {
   userIsValid = false;
   userIsLoggedIn = false;
   userHasSignedUp = false;
+
+  // Regex used for email validation.
   emailRX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  // Changes the form tab from sign in to sign up and vice versa
   changeTab() {
     this.signUpSelected = !this.signUpSelected;
   }
 
+  /**
+   * gets the form data and checks whether the user is trying to signup or sign in 
+   * if sign in it will get the result and send the data to the php backend endpoint for registration and if login to login endpoint.
+   * @param form 
+   */
   onSubmit(form: NgForm) {
     if (form.value.passwordSignUp) {
       this.dataService.registerUser({ 'fullName': form.value.fullName, 'email': form.value.emailSignUp, 'password': form.value.passwordSignUp }).subscribe(
@@ -52,9 +61,12 @@ export class LoginComponent {
         }
       );
     } else {
+      /*
+        Once the user logs in we set all the behavior subjects set on user, paymentinfo, orders and favorites to inform other components that 
+        the user has logged and we then fetch the data for paymentInfo, favorites and orders using the if of the user.
+      */
       this.dataService.userlogin(this.tempUser.email, this.tempUser.pwd).subscribe(
         response => {
-          console.log(response);
           this.dataService.userBehaviorSubject.next(
             {
               id: response[0].userId,
@@ -65,8 +77,6 @@ export class LoginComponent {
           );
           this.dataService.getPaymentInfo(response[0].userId).subscribe(
             success => {
-              console.log(success);
-              console.log(success[0]);
               this.dataService.paymentInfoBehaviourService.next(success[0]);
             }, fail => {
               console.log(fail);
@@ -74,8 +84,6 @@ export class LoginComponent {
           )
           this.dataService.getOrders(response[0].userId).subscribe(
             success => {
-              console.log(success);
-              console.log(success[0]);
               this.dataService.ordersInfoBehaviourSubject.next(success);
             }, fail => {
               console.log(fail);
@@ -83,7 +91,6 @@ export class LoginComponent {
           )
           this.dataService.getFavoriteProducts(response[0].userId).subscribe(
             success => {
-              console.log(success);
               this.dataService.userFavoritesBehaviourSubject.next(success);
             }, fail => {
               console.log(fail);

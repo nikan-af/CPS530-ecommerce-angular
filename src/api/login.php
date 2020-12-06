@@ -8,9 +8,17 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
+        /*
+            parses the object stored in the post request
+            gets the userId and email and trims the content and stores them in the variables.
+        */
         $pwd = mysqli_real_escape_string($con, trim($request->password));
         $email = mysqli_real_escape_string($con, trim($request->email));
         $sql = '';
+
+        /*
+            gets the user record using the email address and the password used by the user to login on the login page.
+        */
         $sql = "SELECT * FROM cps530.users where email='$email' and password='$pwd'";
         if($result = mysqli_query($con,$sql)) {
             $rows = array();

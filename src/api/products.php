@@ -8,8 +8,16 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
+        /*
+            parses the object stored in the post request
+            gets the gender and trims the content and stores them in the variables.
+        */
         $gender = mysqli_real_escape_string($con, trim($request->gender));
         $sql = '';
+
+        /*
+            gets products using the gender flag
+        */
         $sql = "SELECT * FROM cps530.products where gender='$gender'";
         if($result = mysqli_query($con,$sql)) {
             $rows = array();

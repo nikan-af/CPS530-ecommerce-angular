@@ -3,6 +3,7 @@
     <div class="col-md-6">
       <div class="carousel-container">
         <ngb-carousel interval="3000" style="height: 100%;">
+          <!-- Foreach imageURL it will add it to the carousel -->
           <ng-template *ngFor="let image of images" ngbSlide>
             <img [src]="image.imageURL">
           </ng-template>
@@ -56,8 +57,10 @@
 
       <div class="row actionButtons">
         <div class="col-md-12">
-          <button mat-raised-button class="resetButton" mat-dialog-close type="submit"><span
+          <!-- Hides the button if the item is already in favorites and when clicked will add item to favorites. -->
+          <button mat-raised-button class="resetButton" *ngIf="!this.data.favorite" mat-dialog-close (click)="addToFavorites()"><span
               class="material-icons delete-icon">favorite</span></button>
+          <!-- Adds the item to the cart -->
           <button mat-raised-button class="saveButton" type="submit" (click)="addToCart()">Add TO CART</button>
           <p class="error" *ngIf="itemAlreadyAdded">Item is already added to your cart.</p>
         </div>

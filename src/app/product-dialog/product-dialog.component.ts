@@ -24,7 +24,9 @@ export class ProductDialogComponent implements OnInit {
 
     constructor(private dataService: DataService, public dialogRef: MatDialogRef<ProductDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: ProductDialogData, private modalSerivce: ModalService) {
         this.cartItems = this.dataService.getCartItems();
-        this.user = this.dataService.userBehaviorSubject.subscribe(
+
+        // Gets the user information to see if the user is logged in
+        this.dataService.userBehaviorSubject.subscribe(
             success => {
                 this.user = success;
             }
@@ -33,7 +35,8 @@ export class ProductDialogComponent implements OnInit {
 
     ngOnInit() {
         this.product = this.data;
-        console.log(this.product.productId);
+        
+        // Gets product images using the productId of the product object passed into the dialog (i.e. this.data)
         this.dataService.getImages(this.product.productId).subscribe(
             success => {
                 this.images = success;
@@ -45,24 +48,29 @@ export class ProductDialogComponent implements OnInit {
         )
     }
 
+    // Adds the product to the cart when the user clicks "Add to cart" button and creates the cookie and then closes the dialog.
     addToCart() {
         const result = this.dataService.addProductToCart({...this.product, 'qty': this.qty, 'size': this.size});
         
         if (result) {
             this.cartItems.push(this.product);
             this.dialogRef.close();
-            console.log('Added to cart!');
         } else {
             this.itemAlreadyAdded = true;
         }
     }
 
-    addToFavorites(product) {
-        if (this.user.email === '') {
-            this.modalSerivce.open(this.modalSerivce.modalRef);
+    // Makes a post request to PHP backend to insert the product into the favorites table or asks the user to login if not logged in.
+    addToFavorites() {
+        if (this.user.id === 0) {
+            this.modalSerivce.open(this.dataService.loginRef);
+        } else {
+            this.dataService.addFavorite(this.user.id, this.data.productId).subscribe(
+                success => {
+                }, fail => {
+                    console.log(fail);
+                }
+            );
         }
     }
-
-
-    
 }

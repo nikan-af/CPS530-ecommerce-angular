@@ -8,9 +8,16 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
+        /*
+            parses the object stored in the post request
+            gets the userId and trims the content and stores them in the variables.
+        */
         $userId = mysqli_real_escape_string($con, trim($request->userId));
-        echo 'here';
         $sql = '';
+
+        /*
+            Gets user's favorite products by joining favorites and products to get the products that are liked by the user.
+        */
         $sql = "SELECT cps530.products.* FROM cps530.favorites INNER JOIN cps530.products ON cps530.favorites.userId = cps530.products.userId WHERE cps530.favorites.userId = '$userId'";
         if($result = mysqli_query($con,$sql)) {
             $rows = array();

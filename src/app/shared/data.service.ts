@@ -9,8 +9,6 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class DataService {
-    obj = {'title':'T-shirt by Jack & Jones','bullets':['Part of our responsible edit','Crew neck','Short sleeves','Logo chest embroidery','Relaxed fit','Slouchy cut']};
-
     cartItems = [];
     cartItemsBehaviourSubject: BehaviorSubject<any>;
     isLoggedInBehvaiourSubject: BehaviorSubject<any>;
@@ -64,6 +62,8 @@ export class DataService {
         } else {
             this.cartItems = JSON.parse(tempCookie);
         }
+
+        // These are the behavour subjects used in different components to notify other components when the user logs in and data is retrieved from the backend.
         this.cartItemsBehaviourSubject = new BehaviorSubject<any>(this.cartItems);
         this.isLoggedInBehvaiourSubject = new BehaviorSubject<any>(this.loggedIn);
         this.userBehaviorSubject = new BehaviorSubject<any>(this.tempUser);
@@ -74,29 +74,27 @@ export class DataService {
         this.userBehaviorSubject.next(this.tempUser);
     }
 
+    /**
+     * Makes a post request to login.php end point to sign in.
+     * @param email 
+     * @param password 
+     */
     public userlogin(email, password) {
         return this.httpClient.post(this.baseUrl + '/login.php', { 'email': email, 'password': password });
     }
-    
-    //token
-    setToken(token: string) {
-        localStorage.setItem('token', token);
-    }
 
-    getToken() {
-        return localStorage.getItem('token');
-    }
-
-    deleteToken() {
-        localStorage.removeItem('token');
-    }
-
+    /**
+     * Takes an object with fullName, email and password as parameters and makes a post request to register.php endpoint to register a new user.
+     * @param param0 
+     */
     registerUser({fullName, email, password}) {
         return this.httpClient.post(this.baseUrl + '/register.php', {'fullName': fullName, 'email': email, 'password': password});
     }
 
+    /**
+     * Logs out the user and updates the behaviour subjects to inform other components that the user has signed out and reset the components.
+     */
     logout() {
-        console.log('here12');
         this.userBehaviorSubject.next(
             {
                 id: 0,
@@ -129,24 +127,45 @@ export class DataService {
 
     }
 
+    /**
+     * Takes gender as parameter and makes a post request to 'products.php' to get products for that gender.
+     * @param gender 
+     */
     getProducts(gender) {
         return this.httpClient.post(this.baseUrl + '/products.php', {'gender': gender});
     }
 
+    /**
+     * Takes in userId and productId and makes post request to removeFromFavorites.php to remove the product from the user's list of favorite products.
+     * @param userId 
+     * @param productId 
+     */
     removeFromFavorites(userId, productId) {
-        console.log(userId);
-        console.log(productId);
         return this.httpClient.post(this.baseUrl + '/removeFromFavorites.php', { 'userId': `${userId}`, 'productId': `${productId}` });
     }
 
+    /**
+     * Takes in productId and makes a post request to 'productImages.php' to get an array of images for that particular product.
+     * @param productId 
+     */
     getImages(productId) {
         return this.httpClient.post(this.baseUrl + '/productImages.php', {'productId': productId});
     }
 
+    /**
+     * Gets the cartItems cookie that contains the products that user has added to cart and parses the object as JSON.
+     */
     getCartItems() {
         return JSON.parse(this.cookieService.get("cartItems"));
     }
 
+    /**
+     * Takes in the prodcut.
+     * Makes a call to getCartItems to get the product items already in the cart if the item is in the cart ignore if not add the product to 
+            the cart.
+     * After that it stringifies the object as JSON and saves that JSON as cookie.
+     * @param product 
+     */
     addProductToCart(product) {
         var productExists = this.cartItems.map(tmpProduct => {
             if (tmpProduct.productId == product.productId) {
@@ -154,9 +173,7 @@ export class DataService {
             }
 
             return false;
-        })
-
-        console.log(productExists);
+        });
         
         var cartItems = this.getCartItems();
         if (!productExists.includes(true)) {
@@ -170,16 +187,28 @@ export class DataService {
         return false;
     }
 
+    /*
+        Updates the cart behaviour subject.
+    */
     updateCartItems() {
         return new BehaviorSubject<any>(this.cartItems);
     }
 
+    /**
+     * Resets the cart cookie to empty array 
+     */
     resetCart() {
         this.cartItems = [];
         this.cartItemsBehaviourSubject.next([]);
         this.cookieService.set("cartItems", JSON.stringify([]));
     }
 
+    /**
+     * Takes in a product object as a parameter
+     * Calls getCartItems to get the items in the cart
+     * Checks whether the product is already in the cart
+     * @param product 
+     */
     removeItem(product) {
         var tmpCartItems = this.getCartItems();
         for (var i = 0; i < tmpCartItems.length; i++) {
@@ -192,33 +221,74 @@ export class DataService {
         this.cookieService.set("cartItems", JSON.stringify(tmpCartItems));
     }
 
+    /**
+     * Takes formData as parameter and makes a post request to 'sendInquiryForm.php' to insert the inquiry into the inquiries table.
+     * @param formData 
+     */
+    sendInquiryForm(formData) {
+        return this.httpClient.post(this.baseUrl + '/sendInquiryForm.php', formData);
+    }
+
+    /**
+     * Takes in formData and makes a post request to 'recordPurchase.php' to insert the purchase data into the orders table.
+     * @param formData 
+     */
     recordPurchase(formData) {
-        console.log(formData);
         return this.httpClient.post(this.baseUrl + '/recordPurchase.php', {...formData});
     }
 
+    /**
+     * Takes in formData and makes a post request to 'recordDiscountReq.php' to insert the discount request into the discount table.
+     * @param formsData 
+     */
+    recordDiscountReq(formsData) {
+        return this.httpClient.post(this.baseUrl + '/recordDiscountReq.php', formsData);
+    }
+
+    /**
+     * Takes in userId and makes a post request to 'getPaymentInfo.php' to get the payment info on the last order of the user.
+     * @param userId 
+     */
     getPaymentInfo(userId) {
         return this.httpClient.post(this.baseUrl + '/getPaymentInfo.php', { "userId":userId });
     }
 
+    /**
+     * Takes in userId and makes a post request to 'getOrders.php' to get the past orders of the user.
+     * @param userId 
+     */
     getOrders(userId) {
         return this.httpClient.post(this.baseUrl + '/getOrders.php', {"userId":userId});
     }
 
+    /**
+     * Takes in userId and productId and makes a post request to 'addFavorite.php' to insert the record into favorites table.
+     * @param userId 
+     * @param productId 
+     */
     addFavorite(userId, productId) {
-        console.log(userId);
-        console.log(productId);
         return this.httpClient.post(this.baseUrl + '/addFavorite.php', {"userId":userId,"productId":productId});
     }
 
+    /**
+     * Takes in userId and makes a post request to 'getFavorites.php' to get the favorite products of the user.
+     * @param userId 
+     */
     getFavorites(userId) {
         return this.httpClient.post(this.baseUrl + '/getFavorites.php', {"userId":userId});
     }
 
+    /**
+     * Takes in userId and makes a post request to 'getFavoriteProducts.php' to get the favorite products of the user.
+     * @param userId 
+     */
     getFavoriteProducts(userId) {
         return this.httpClient.post(this.baseUrl + '/getFavoriteProducts.php', { "userId":userId });
     }
 
+    /**
+     * Returns a new behaviour subject on loggedIn boolean to inform other components when the user logs in.
+     */
     isLoggedIn() {
         return new BehaviorSubject<any>(this.loggedIn);
     }

@@ -16,6 +16,10 @@ export class FavoritesComponent implements OnInit {
 
   constructor(private dataService: DataService, private dialog: MatDialog) { }
 
+  /**
+   * Upon initialization of the component set the event listeners on userData, favoriteProducts and userFavorites so that these
+        arrays get updated in the component when data changes in other components.
+   */
   ngOnInit(): void {
     this.dataService.userBehaviorSubject.subscribe(
       data => {
@@ -38,9 +42,7 @@ export class FavoritesComponent implements OnInit {
 
     this.dataService.userFavoritesBehaviourSubject.subscribe(
       data => {
-        console.log(data);
         this.favoriteProducts = data as [];
-        console.log(this.favoriteProducts);
         if (this.favoriteProducts.length > 0) {
           this.noFavorites = false;
         } else {
@@ -50,8 +52,11 @@ export class FavoritesComponent implements OnInit {
     )
   }
 
+  /**
+   * Takes in product object and opens the product-dialog.component and passes in the product object to the component.
+   * @param product 
+   */
   openProductDialog(product) {
-    console.log(product);
     this.dialog.open(ProductDialogComponent, {
       panelClass: 'custom-dialog-container',
       width: '1200px',
@@ -60,16 +65,18 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
+  /**
+   * Takes in a product and removes the product from favorites
+   * Uses dataService to make a post request to php backend to remove the product from the favorites table.
+   * @param product 
+   */
   removeFromFavorites(product) {
     this.favoriteProducts.splice(this.favoriteProducts.indexOf(product), 1);
-    console.log(this.user.id);
-    console.log(product.productId);
     if (this.favoriteProducts.length === 0) {
       this.noFavorites = true;
     }
     this.dataService.removeFromFavorites(this.user.id, product.productId).subscribe(
       success => {
-        console.log(success);
       }, fail => {
         console.log(fail);
       }
