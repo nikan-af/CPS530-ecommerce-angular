@@ -40,6 +40,8 @@ export class CheckoutComponent implements OnInit {
   private chosenOption: AddressSuggestion;
   private chosenProperty: AddressSuggestion;
   searchOptions: Subject<AddressSuggestion[]> = new Subject<AddressSuggestion[]>();
+
+  // Error messages that will be shown under the input when the field value is not valid.
   errorMessages = {
     credit_card_number: [
       { type: 'required', message: 'Card number is required.' },
@@ -93,6 +95,8 @@ export class CheckoutComponent implements OnInit {
   private valueChangesSub: Subscription;
 
   @Input('cartItems') cartItems: [];
+
+  // When the user clicks on the back icon it will emit an event and goes back to the shopping cart page.
   @Output() goBack = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, public zone: NgZone, private dataService: DataService, private modalService: ModalService) {
@@ -101,6 +105,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Gets the user information to check if the user is logged in or not.
     this.dataService.isLoggedInBehvaiourSubject.subscribe(
       success => {
         this.loggedIn = success;
@@ -111,6 +116,8 @@ export class CheckoutComponent implements OnInit {
         this.user = success;
       }
     );
+
+    // Form Validator using Regex
     this.checkout_validations = this.formBuilder.group({
       credit_card_number: new FormControl('', {
         validators: Validators.compose([
@@ -184,8 +191,9 @@ export class CheckoutComponent implements OnInit {
       })
     });
 
+    // This is triggered when the value of the credit_card_address_line_1 changes.
     this.valueChangesSub = this.checkout_validations.get('credit_card_address_line_1').valueChanges.subscribe((value) => {
-      console.log(value)
+      
       if (this.userInputTimeout) {
         window.clearTimeout(this.userInputTimeout);
       }
@@ -194,11 +202,13 @@ export class CheckoutComponent implements OnInit {
         this.searchOptions.next(null);
       }
 
+      // When the user enteres more than 3 characters we will make a call to the Geoapify API
       if (!value || value.length < 3) {
         this.searchOptions.next(null);
         return;
       }
 
+      // We wait 300 ms and then we make the call in case user decides to change the value.
       this.userInputTimeout = window.setTimeout(() => {
         this.generateSuggestions(value);
       }, 300);
@@ -231,19 +241,22 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  submit() {
-    
+  /*
+    Submits the checkout form values to the php backend.
+  */
+  submit() {  
     if (this.checkout_validations.valid) {
-      console.log('here');
       if (this.loggedIn) {
         let formValues = { 'credit_card_number': '', 'credit_card_holder': '', 'expiry_month': '', 'expiry_year': '', 'credit_card_first_name': '', 'credit_card_last_name': '', 'credit_card_address_line_1': '', 'credit_card_address_line_2': '', 'country': '', 'province': '', 'city': '', 'postal_code': '' };
         for (const field in this.checkout_validations.controls) {
-          console.log(this.checkout_validations.controls[field].value);
           formValues[field] = this.checkout_validations.controls[field].value;
         }
         formValues['userId'] = this.user.id;
         formValues['products'] = this.cartItems;
 
+        /*
+          Once the request succeeds reset the form and show success message.
+        */
         this.dataService.recordPurchase(formValues).subscribe(
           success => {
             this.purchaseComplete = true;
@@ -264,6 +277,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  // Gets called when the user selects one of the place suggestions provided and we use the information to fill out other form fields.
   public optionSelectionChange(option, event: MatOptionSelectionChange) {
     if (event.isUserInput) {
       if (option.longAddress) {
@@ -279,6 +293,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  // Makes the call to geoapify api and uses the data returns to call generateShortAddress() and generateLongAddress() to parse the information.
   generateSuggestions(text: string) {
     const url = `https://api.geoapify.com/v1/geocode/search?text=${text}%20&lang=en&limit=5&filter=countrycode:${this.countries.join(',')}&apiKey=c5c5476a13ca433a95f319127a1e9fbd`;
 
@@ -287,7 +302,6 @@ export class CheckoutComponent implements OnInit {
     }
     this.requestSub = this.http.get(url).subscribe((data: GeoJSON.FeatureCollection) => {
       const placeSuggestions = data.features.map(feature => {
-        console.log(feature.properties);
         const properties: GeocodingFeatureProperties = (feature.properties as GeocodingFeatureProperties);
 
         return {
@@ -303,14 +317,14 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+  // Uses the information to generate short address.
   private generateShortAddress(properties: GeocodingFeatureProperties, typeOfSearch): string {
     let shortAddress = properties.name;
 
     if (typeOfSearch === 'property' && properties.state && properties.city) {
       return properties.city + ', ' + properties.state;
     }
-
-    console.log(properties);
+    
     if (properties.address_line1 && properties.address_line2.indexOf(',') !== -1) {
       return properties.address_line2
     }
@@ -324,14 +338,15 @@ export class CheckoutComponent implements OnInit {
     return shortAddress;
   }
 
+  // generates long address
   private generateLongAddress(properties: GeocodingFeatureProperties): string {
     let fullAddress = properties.formatted;
     return fullAddress;
   }
 
+  // resets the checkout form 3 sec after the user submits the form 
   resetCheckoutForm() {
     setTimeout(() => {
-      console.log('here');
       this.dataService.cartItemsBehaviourSubject.next([]);
       this.dataService.resetCart();
       this.messageShown = true;

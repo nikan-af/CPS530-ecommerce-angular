@@ -13,12 +13,13 @@ export class ModalService {
 
   constructor(private modalService: NgbModal, private dataService: DataService) {};
 
+  // opens the modal
   open(content, options: NgbModalOptions = {ariaLabelledBy: 'modal-basic-title'}) {
-    console.log(content)
     this.modalRef = this.modalService.open(content, options);
     this.dataService.loginRef = content;
   }
 
+  // closes the modal
   close(content) {
     this.modalRef.close(content);
   }

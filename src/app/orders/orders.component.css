@@ -29,19 +29,19 @@
 }
 
 .row-item {
-    display: flex;
-    flex-direction: row;
-  }
+  display: flex;
+  flex-direction: row;
+}
 
 .image {
-    flex-grow: 1;
-    order: 1;
+  flex-grow: 1;
+  order: 1;
 }
 
 .description {
-    flex-grow: 10;
-    order: 2;
-    margin-left: 20px;
+  flex-grow: 10;
+  order: 2;
+  margin-left: 20px;
 }
 
 .order .item .details p {
@@ -62,83 +62,82 @@
 }
 
 @media only screen and (min-width: 900px) and (max-width: 1200px) {
-    .container-fluid {
-        width: 90%;
-        min-height: 80vh;
-        margin: 0 auto;
-      }
+  .container-fluid {
+    width: 90%;
+    min-height: 80vh;
+    margin: 0 auto;
+  }
 
-      .order {
-        padding: 30px 70px;
-      }
+  .order {
+    padding: 30px 70px;
+  }
 }
 
 @media only screen and (max-width: 900px) {
-    .container-fluid {
-        width: 90%;
-        min-height: 80vh;
-        margin: 0 auto;
-      }
+  .container-fluid {
+    width: 90%;
+    min-height: 80vh;
+    margin: 0 auto;
+  }
 
-      .order {
-        padding: 30px 10px;
-      }
+  .order {
+    padding: 30px 10px;
+  }
 }
 
 /* Loading sign */
 
 .backdrop {
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 30vh;
-    margin-bottom: 40vh;
-  }
-  
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border-top: 8px solid aliceblue;
-    border-right: 8px solid aliceblue;
-    border-bottom: 8px solid aliceblue;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 30vh;
+  margin-bottom: 40vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border-top: 8px solid aliceblue;
+  border-right: 8px solid aliceblue;
+  border-bottom: 8px solid aliceblue;
+  border-left: 8px solid #26191b;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
     border-left: 8px solid #26191b;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation-name: spin;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
   }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-      border-left:8px solid #26191b;
-    }
-  
-    25%{
-      transform: rotate(360deg);
-      border-left:8px solid #f9b384;
-    }
-  
-    50%{
-      transform:rotate(720deg);
-      border-left:8px solid #26191b;
-    }
-  
-    75%{
-      transform: rotate(1080deg);
-      border-left:8px solid #f9b384;
-    }
-  
-    100% {
-      transform: rotate(1440deg);
-      border-left:8px solid #26191b;
-    }
-  
+
+  25% {
+    transform: rotate(360deg);
+    border-left: 8px solid #f9b384;
   }
-  
-  .logo {
-    margin-top: 5px;
-    letter-spacing:0.06em;
-    font-size: 0.8rem;
+
+  50% {
+    transform: rotate(720deg);
+    border-left: 8px solid #26191b;
   }
+
+  75% {
+    transform: rotate(1080deg);
+    border-left: 8px solid #f9b384;
+  }
+
+  100% {
+    transform: rotate(1440deg);
+    border-left: 8px solid #26191b;
+  }
+}
+
+.logo {
+  margin-top: 5px;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+}

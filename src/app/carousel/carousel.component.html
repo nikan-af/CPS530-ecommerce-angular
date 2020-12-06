@@ -1,11 +1,12 @@
 <ngb-carousel interval="8000">
-    <ng-template ngbSlide>
-      <a [routerLink]="['products-women']" routerLinkActive="active"><img src="../../assets/images/carousel1-2.jpg" alt="carousel1"></a>
-    </ng-template>
-    <ng-template ngbSlide>
-      <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/carousel2-2.jpg" alt="carousel2"></a>
-    </ng-template>
-    <!-- <ng-template ngbSlide>
-      <img src="../../assets/images/carousel3.jpg" alt="carousel3">
-    </ng-template> -->
+  <ng-template ngbSlide>
+    <!-- When clicking on the image it redirects to the products component -->
+    <a [routerLink]="['products-women']" routerLinkActive="active"><img src="../../assets/images/carousel1-2.jpg"
+        alt="carousel1"></a>
+  </ng-template>
+  <ng-template ngbSlide>
+    <!-- When clicking on the image it redirects to the products component -->
+    <a [routerLink]="['products-men']" routerLinkActive="active"><img src="../../assets/images/carousel2-2.jpg"
+        alt="carousel2"></a>
+  </ng-template>
 </ngb-carousel>

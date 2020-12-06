@@ -1,11 +1,17 @@
 <div class="products">
     <div *ngFor="let product of products; let i = index">
+        <!-- Limits each row to 3 products only using mod -->
         <div class="row" *ngIf="i % 3 === 0">
             <div class="col-md-4" *ngIf="i < products.length" (click)="this.openProductDialog(products[i])">
                 <mat-card appMaterialElevation class="example-card">
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i].imageURL}}
                             alt={{products[i].productName}}></div>
                     <mat-card-content class="mat-content">
+                        <!-- 
+                            If the product is already liked show the red heart icon if the product is not in favorites show the icon in black 
+                            If the user is not logged in it will open the dialog and ask the user to login otherwise it will call addToFavorites() or removeFromFavorites()
+                            to add or remove products from the favorite products array.
+                        -->
                         <a *ngIf="this.favoriteProducts.indexOf(this.products[i].productId) < 0"
                             (click)="addToFavorites(products[i]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>
@@ -27,6 +33,11 @@
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+1].imageURL}}
                             alt={{products[i+1].productName}}></div>
                     <mat-card-content class="mat-content">
+                        <!-- 
+                            If the product is already liked show the red heart icon if the product is not in favorites show the icon in black 
+                            If the user is not logged in it will open the dialog and ask the user to login otherwise it will call addToFavorites() or removeFromFavorites()
+                            to add or remove products from the favorite products array.
+                        -->
                         <a *ngIf="this.favoriteProducts.indexOf(this.products[i+1].productId) < 0"
                             (click)="addToFavorites(products[i+1]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>
@@ -47,6 +58,11 @@
                     <div class="card-image"><img raisedElevation="16" mat-card-image src={{products[i+2].imageURL}}
                             alt={{products[i+2].productName}}></div>
                     <mat-card-content class="mat-content">
+                        <!-- 
+                            If the product is already liked show the red heart icon if the product is not in favorites show the icon in black 
+                            If the user is not logged in it will open the dialog and ask the user to login otherwise it will call addToFavorites() or removeFromFavorites()
+                            to add or remove products from the favorite products array.
+                        -->
                         <a *ngIf="this.favoriteProducts.indexOf(this.products[i+2].productId) < 0"
                             (click)="addToFavorites(products[i+2]); $event.stopPropagation()"><span
                                 class="material-icons delete-icon">favorite</span></a>

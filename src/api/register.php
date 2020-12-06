@@ -8,11 +8,19 @@
     $request = json_decode($postdata);
 
     if(isset($postdata) && !empty($postdata)) {
+        /*
+            parses the object stored in the post request
+            gets the pwd, email and fullName and trims the content and stores them in the variables.
+        */
         $pwd = mysqli_real_escape_string($con, trim($request->password));
         $email = mysqli_real_escape_string($con, trim($request->email));
         $password = mysqli_real_escape_string($con, trim($request->password));
         $fullName = mysqli_real_escape_string($con, trim($request->fullName));
         $sql = '';
+
+        /*
+            insert a new record into the users table using the information passed in by user when using the sign up for to register as a new user.
+        */
         $sql = "INSERT INTO users(email, fullName, password, createdAt) VALUES('$email', '$fullName', '$password', CURRENT_TIME)";
         if($result = mysqli_query($con,$sql)) {
             $sql = "SELECT * FROM cps530.users WHERE email = '$email'";
