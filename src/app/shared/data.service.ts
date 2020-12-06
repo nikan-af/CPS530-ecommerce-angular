@@ -51,9 +51,9 @@ export class DataService {
  
     redirectUrl: string;
     /* PROD 
-    baseUrl: string = "http://3.12.38.160/api";
+    baseUrl: string = "http://3.138.36.207/";
     */
-    baseUrl: string = "http://localhost:8080/api";
+    baseUrl: string = "http://localhost/api/";
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
     constructor(private httpClient: HttpClient, private cookieService: CookieService) { 
         var tempCookie = this.cookieService.get("cartItems");
