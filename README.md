@@ -2,9 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
-Download the project using git and go inside the project directory and run "npm install" in the command line to install the dependencies.
+Download the project using git and go inside the project directory and run `npm install` in the command line to install the dependencies.
 
-After that run "npm start" to compile and start the project.
+After that run `npm start` to compile and start the project.
 
 After that go to localhost:4200 in your browser and you should be able to see the project.
 
