@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
+In order to compile and run the project you need to ensure you have Node and NPM installed.
+
+Follow this link on how to install `https://docs.npmjs.com/downloading-and-installing-node-js-and-npm`
+
 Download the project using git and go inside the project directory and run `npm install` in the command line to install the dependencies.
 
 After that run `npm start` to compile and start the project.
