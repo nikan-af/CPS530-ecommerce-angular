@@ -18,7 +18,7 @@
         /*
             Gets user's favorite products by joining favorites and products to get the products that are liked by the user.
         */
-        $sql = "SELECT cps530.products.* FROM cps530.favorites INNER JOIN cps530.products ON cps530.favorites.userId = cps530.products.userId WHERE cps530.favorites.userId = '$userId'";
+        $sql = "SELECT cps530.products.* FROM cps530.favorites INNER JOIN cps530.products ON cps530.favorites.productId = cps530.products.productId WHERE cps530.favorites.userId = '$userId'";
         if($result = mysqli_query($con,$sql)) {
             $rows = array();
             while($row = mysqli_fetch_assoc($result)) {

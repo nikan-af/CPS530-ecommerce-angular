@@ -53,7 +53,7 @@ export class DataService {
     /* PROD 
     baseUrl: string = "http://3.138.36.207/";
     */
-    baseUrl: string = "http://localhost/api/";
+    baseUrl: string = "http://3.138.36.207/";
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
     constructor(private httpClient: HttpClient, private cookieService: CookieService) { 
         var tempCookie = this.cookieService.get("cartItems");

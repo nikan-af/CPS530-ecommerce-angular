@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div *ngIf="this.noFavorites" class="no-history">
+<div *ngIf="this.noFavorites && !this.loading" class="no-history">
     <h1>NO FAVORITES</h1>
 </div>
 
