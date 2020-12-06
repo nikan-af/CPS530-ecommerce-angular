@@ -1,32 +1,60 @@
-html{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Open Sans Condensed", sans-serif !important;
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans Condensed", sans-serif !important;
 }
 
 .wrapper-box {
-    height: 70vh;
+  height: 70vh;
 }
 
-.wrapper-box{
-    margin-top: 5%;
-    font-family: "Open Sans Condensed", sans-serif !important;
-    overflow-x: hidden !important;
-
+.wrapper-box {
+  margin-top: 5%;
+  font-family: "Open Sans Condensed", sans-serif !important;
+  overflow-x: hidden !important;
 }
 
-.title{
-    font-size: 30px;
-    font-family: "Open Sans Condensed", sans-serif !important;
+.title {
+  font-size: 30px;
+  font-family: "Open Sans Condensed", sans-serif !important;
 }
 
-.description{
-    font-size: 18px;
-    font-family: "Open Sans Condensed", sans-serif !important;
+.description {
+  font-size: 18px;
+  font-family: "Open Sans Condensed", sans-serif !important;
 }
 
-.labeltext{
-    font-size: 20px;
-    font-family: "Open Sans Condensed", sans-serif !important;
+.labeltext {
+  font-size: 20px;
+  font-family: "Open Sans Condensed", sans-serif !important;
+}
+
+.purchaseComplete {
+  margin-top: 20vh;
+  margin-bottom: 30vh;
+}
+
+.email-conformation-icon {
+  font-size: 12rem;
+  width: 12rem;
+  height: 12rem;
+  margin: 30px auto;
+  text-align: center;
+  color: #3f51b5 !important;
+}
+
+.email-conformation-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.email-conformation-container p {
+  font-family: "Open Sans Condensed", sans-serif !important;
+  font-size: 1.5rem;
+}
+
+.email-conformation-container p.title {
+  font-family: "Open Sans Condensed", sans-serif !important;
+  font-size: 1rem;
 }

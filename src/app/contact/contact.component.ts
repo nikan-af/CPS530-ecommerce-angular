@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../shared/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-us',
@@ -9,15 +10,21 @@ import { DataService } from '../shared/data.service';
 })
 export class ContactComponent implements OnInit {
 
+  // Regex expression for a valid email address
   emailRX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  emailAddress;
+  email;
   contact_form_validations;
-  typeOfInquiry;
+  type_of_inquiry;
   formSent = false;
 
-  inquiryTypeOptions = { option1: 'Inquiring about a property' };
+  inquiryTypeOptions = { 
+    option1: 'Returns',
+    option2: 'Shipping',
+    option3: 'Tech',
+    option4: 'Any Other Inquiry' 
+  };
 
-
+  // Error messages when the form fields are not valid 
   errorMessages = {
     first_name: [
       { type: 'required', message: 'First name is required.' },
@@ -31,18 +38,20 @@ export class ContactComponent implements OnInit {
       { type: 'required', message: 'Email address is required.' },
       { type: 'pattern', message: 'Please enter a valid email address.' }
     ],
-    inquiryType: [
+    type_of_inquiry: [
       { type: 'required', message: 'Please select a type.' },
     ],
-    messageTextBox: [
+    message: [
       { type: 'required', message: 'Message is required.' },
       { type: 'maxLength', message: 'Max characters 265.' }
     ]
   }
 
-  constructor(private formBuilder: FormBuilder, private dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private dataService: DataService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+
+    // Form validator
     this.contact_form_validations = this.formBuilder.group({
       first_name: new FormControl('', {
         validators: Validators.compose([
@@ -56,50 +65,52 @@ export class ContactComponent implements OnInit {
           Validators.pattern('^[a-zA-Z ]*$')])
         , updateOn: 'blur'
       }),
-      emailAddress: new FormControl('', {
+      email: new FormControl('', {
         validators: Validators.compose([
           Validators.required,
           Validators.pattern(this.emailRX)
         ]),
         updateOn: 'blur'
       }),
-      inquiryType: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
-      messageTextBox: new FormControl('', {
+      type_of_inquiry: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
+      message: new FormControl('', {
         validators: Validators.compose([
           Validators.required,
           Validators.maxLength(265)
         ]),
         updateOn: 'blur'
-      }),
-      sendEmailToSelf: new FormControl()
+      })
     });
   }
 
-
+  /**
+   * Checks whether the form fields are valid
+   * submits the form values to the php backend 
+   * Shows the success message when the data is inserted successfully
+   */
   submit() {
-    // if (this.contact_form_validations.valid) {
-    //   let formValues = { 'first_name': '', 'last_name': '', 'emailAddress': '', 'inquiryType': '', 'messageTextBox': '', 'sendEmailToSelf': '' };
-    //   for (const field in this.contact_form_validations.controls) {
-    //     if (field === 'inquiryType') {
-    //       formValues[field] = this.inquiryTypeOptions[this.contact_form_validations.controls[field].value];
-    //       continue;
-    //     }
-    //     console.log(this.contact_form_validations.controls[field].value);
-    //     formValues[field] = this.contact_form_validations.controls[field].value;
-    //   }
-    //   console.log(formValues);
+    if (this.contact_form_validations.valid) {
+      let formValues = { 'first_name': '', 'last_name': '', 'email': '', 'type_of_inquiry': '', 'message': '' };
+      for (const field in this.contact_form_validations.controls) {
+        if (field === 'type_of_inquiry') {
+          formValues[field] = this.inquiryTypeOptions[this.contact_form_validations.controls[field].value];
+          continue;
+        }
 
-    //   this.formService.sendInquiryForm(formValues).subscribe(
-    //     success => {
-    //       console.log('Form submitted to the server!');
-    //     }
-    //   );
-    //   this.contact_form_validations.reset();
-    //   for (let name in this.contact_form_validations.controls) {
-    //     this.contact_form_validations.controls[name].setErrors(null);
-    //  }
-    //  this.formSent = true;
-    // }
+        formValues[field] = this.contact_form_validations.controls[field].value;
+      }
+
+      this.dataService.sendInquiryForm(formValues).subscribe(
+        success => {
+          this.toastr.success('We have received your inquiry.');
+        }
+      );
+      this.contact_form_validations.reset();
+      for (let name in this.contact_form_validations.controls) {
+        this.contact_form_validations.controls[name].setErrors(null);
+     }
+     this.formSent = true;
+    }
   }
 
 }

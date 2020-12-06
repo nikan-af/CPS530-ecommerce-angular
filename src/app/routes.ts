@@ -13,6 +13,8 @@ import { SecurityComponent } from './security/security.component';
 import { HelpComponent } from './help/help.component';
 import { DiscountComponent } from './discount/discount.component';
 
+/* All the url routes in our website and the corresponding components  */
+
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
   { path: 'products-men', component: ProductsComponent },

@@ -27,37 +27,33 @@
               <br>
                 <mat-form-field appearance="outline" class="field">
                   <mat-label>Email Address</mat-label>
-                  <input id="emailAddress"  matInput placeholder="Email Address" [(ngModel)]="this.emailAddress" formControlName="emailAddress">
+                  <input id="emailAddress"  matInput placeholder="Email Address" [(ngModel)]="this.email" formControlName="email">
                   <mat-error *ngFor="let validation of errorMessages.email">
-                    <p *ngIf="this.contact_form_validations.get('emailAddress').hasError(validation.type) && (this.contact_form_validations.get('emailAddress').dirty || this.contact_form_validations.get('emailAddress').touced)">{{validation.message}}</p>
+                    <p *ngIf="this.contact_form_validations.get('email').hasError(validation.type) && (this.contact_form_validations.get('email').dirty || this.contact_form_validations.get('email').touced)">{{validation.message}}</p>
                   </mat-error>
                 </mat-form-field>
   
                 <mat-form-field appearance="outline" class="field">
                   <mat-label>Type of Inquiry</mat-label>
-                  <mat-select  formControlName="inquiryType" [(ngModel)]="this.typeOfInquiry">
+                  <mat-select  formControlName="type_of_inquiry" [(ngModel)]="this.type_of_inquiry">
                     <mat-option value="option1">Returns</mat-option>
                     <mat-option value="option2">Shipping</mat-option>
                     <mat-option value="option3">Tech</mat-option>
                     <mat-option value="option3">Any Other Inquiry</mat-option>
                   </mat-select>
-                  <mat-error *ngFor="let validation of errorMessages.inquiryType">
-                    <p *ngIf="this.contact_form_validations.get('inquiryType').hasError(validation.type) && (this.contact_form_validations.get('inquiryType').dirty || this.contact_form_validations.get('inquiryType').touced)">{{validation.message}}</p>
+                  <mat-error *ngFor="let validation of errorMessages.type_of_inquiry">
+                    <p *ngIf="this.contact_form_validations.get('type_of_inquiry').hasError(validation.type) && (this.contact_form_validations.get('type_of_inquiry').dirty || this.contact_form_validations.get('type_of_inquiry').touced)">{{validation.message}}</p>
                   </mat-error>
                 </mat-form-field>
               <br>
   
                 <mat-form-field appearance="outline" class="text-area field">
                   <mat-label>Message</mat-label>
-                  <textarea matInput rows="5" cols="40" formControlName="messageTextBox"></textarea>
-                  <mat-error *ngFor="let validation of errorMessages.messageTextBox">
-                    <p *ngIf="this.contact_form_validations.get('messageTextBox').hasError(validation.type) && (this.contact_form_validations.get('messageTextBox').dirty || this.contact_form_validations.get('messageTextBox').touced)">{{validation.message}}</p>
+                  <textarea matInput rows="5" cols="40" formControlName="message"></textarea>
+                  <mat-error *ngFor="let validation of errorMessages.message">
+                    <p *ngIf="this.contact_form_validations.get('message').hasError(validation.type) && (this.contact_form_validations.get('message').dirty || this.contact_form_validations.get('message').touced)">{{validation.message}}</p>
                   </mat-error>
                 </mat-form-field>
-  
-              <br>
-  
-              <mat-checkbox class="myCheckbox" formControlName="sendEmailToSelf">Send a copy of the email to myself.</mat-checkbox>
   
               <br>
   

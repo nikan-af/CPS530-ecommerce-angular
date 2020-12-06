@@ -8,6 +8,10 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 if (isset($postdata) && !empty($postdata)) {
+    /*
+        parses the object stored in the post request
+        gets the checkout form field data and trims the content and stores them in the variables.
+    */
     $userId = mysqli_real_escape_string($con, trim($request->userId));
     $products = $request->products;
     $credit_card_number = mysqli_real_escape_string($con, trim($request->credit_card_number));
@@ -23,6 +27,9 @@ if (isset($postdata) && !empty($postdata)) {
     $city = mysqli_real_escape_string($con, trim($request->city));
     $postal_code = mysqli_real_escape_string($con, trim($request->postal_code));
 
+    /* 
+        For each product item on the order we create a new record in orders table.
+    */
     foreach ($products as $product) {
         $productId = $product->productId;
         $qty = $product->qty;

@@ -1,32 +1,31 @@
-.content{
-    text-align: center;
-    padding-top: 1%;
-    font-family: 'Asap Condensed', sans-serif;
+.content {
+  text-align: center;
+  padding-top: 60px;
+  font-family: "Asap Condensed", sans-serif;
 }
-p{
-    overflow-wrap: break-word;
-    padding: 1% 25% 2%;
-    font-size: large;
-    font-size: 1.3rem;
-    line-height: 1.5rem;
+p {
+  overflow-wrap: break-word;
+  padding: 1% 25% 2%;
+  font-size: 1.3rem;
+  line-height: 1.7rem;
 }
-h1{
-padding-top: 2%;
-font-size: 3rem;
-font-weight: bold;
-font-weight: 550;
+h1 {
+  padding-top: 2%;
+  font-size: 3rem;
+  font-weight: bold;
+  font-weight: 550;
 }
-img{
-    padding: 1% 1%;
+img {
+  padding: 1% 1%;
 }
 
-#aboutus{
-padding-bottom: 2%;
-display: none;
-margin-bottom: 100px;
+#aboutus {
+  padding-bottom: 2%;
+  display: none;
+  margin-bottom: 100px;
 }
-@media screen and (min-width:860px){
-    #aboutus{
-        display: inline-block;
-    }
+@media screen and (min-width: 860px) {
+  #aboutus {
+    display: inline-block;
+  }
 }
